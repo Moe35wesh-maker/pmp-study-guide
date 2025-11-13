@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMP Flashcards - Interactive Study Cards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .category-filter {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .filter-btn {
+            background: white;
+            color: #667eea;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .flashcard-container {
+            perspective: 1000px;
+            margin-bottom: 30px;
+        }
+
+        .flashcard {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .flashcard-front {
+            background: white;
+        }
+
+        .flashcard-back {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .card-category {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #667eea;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .flashcard-back .card-category {
+            background: white;
+            color: #667eea;
+        }
+
+        .card-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f0f0f0;
+            color: #667eea;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-weight: 600;
+        }
+
+        .flashcard-back .card-number {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .card-content {
+            text-align: center;
+            font-size: 1.5em;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .flashcard-back .card-content {
+            color: white;
+            font-size: 1.3em;
+        }
+
+        .flip-hint {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .control-btn {
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .progress {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎴 PMP Flashcards</h1>
+            <p>Click cards to flip | Master key concepts with interactive learning</p>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="category-filter">
+            <button class="filter-btn active" onclick="filterCards('all')">All Cards</button>
+            <button class="filter-btn" onclick="filterCards('processes')">Processes</button>
+            <button class="filter-btn" onclick="filterCards('formulas')">Formulas</button>
+            <button class="filter-btn" onclick="filterCards('agile')">Agile</button>
+            <button class="filter-btn" onclick="filterCards('leadership')">Leadership</button>
+            <button class="filter-btn" onclick="filterCards('terms')">Key Terms</button>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress">
+            <div><strong>Card <span id="currentCard">1</span> of <span id="totalCards">50</span></strong></div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </div>
+
+        <!-- Flashcard -->
+        <div class="flashcard-container">
+            <div class="flashcard" id="flashcard" onclick="flipCard()">
+                <div class="flashcard-face flashcard-front">
+                    <span class="card-category" id="frontCategory">Process</span>
+                    <span class="card-number" id="cardNumber">1/50</span>
+                    <div class="card-content" id="frontContent">
+                        What are the 5 Process Groups in project management?
+                    </div>
+                    <div class="flip-hint">💡 Click to see answer</div>
+                </div>
+                <div class="flashcard-face flashcard-back">
+                    <span class="card-category" id="backCategory">Process</span>
+                    <span class="card-number">1/50</span>
+                    <div class="card-content" id="backContent">
+                        1. Initiating<br>
+                        2. Planning<br>
+                        3. Executing<br>
+                        4. Monitoring & Controlling<br>
+                        5. Closing
+                    </div>
+                    <div class="flip-hint">💡 Click to flip back</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="control-btn" id="prevBtn" onclick="previousCard()">← Previous</button>
+            <button class="control-btn" onclick="shuffleCards()">🔀 Shuffle</button>
+            <button class="control-btn" id="nextBtn" onclick="nextCard()">Next →</button>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <a href="practice/index.html" class="btn btn-secondary">← Back to Practice Hub</a>
+        </div>
+    </div>
+
+    <script>
+        const flashcards = [
+            // Processes (10 cards)
+            {
+                category: 'processes',
+                front: 'What are the 5 Process Groups in project management?',
+                back: '1. Initiating<br>2. Planning<br>3. Executing<br>4. Monitoring & Controlling<br>5. Closing'
+            },
+            {
+                category: 'processes',
+                front: 'How many processes are in the Planning Process Group?',
+                back: '24 processes - the largest process group'
+            },
+            {
+                category: 'processes',
+                front: 'Name the 10 Knowledge Areas in PMBOK',
+                back: 'Integration, Scope, Schedule, Cost, Quality, Resource, Communications, Risk, Procurement, Stakeholder'
+            },
+            {
+                category: 'processes',
+                front: 'What is the first process in project management?',
+                back: 'Develop Project Charter (Initiating Process Group)'
+            },
+            {
+                category: 'processes',
+                front: 'What process creates the WBS?',
+                back: 'Create WBS (Planning - Scope Management)'
+            },
+            {
+                category: 'processes',
+                front: 'Which process identifies stakeholders?',
+                back: 'Identify Stakeholders (Initiating Process Group)'
+            },
+            {
+                category: 'processes',
+                front: 'What process formally closes the project?',
+                back: 'Close Project or Phase (Closing Process Group)'
+            },
+            {
+                category: 'processes',
+                front: 'What process develops the project management plan?',
+                back: 'Develop Project Management Plan (Planning - Integration)'
+            },
+            {
+                category: 'processes',
+                front: 'How many processes are in Closing?',
+                back: 'Only 1 process: Close Project or Phase'
+            },
+            {
+                category: 'processes',
+                front: 'What process manages stakeholder engagement?',
+                back: 'Manage Stakeholder Engagement (Executing Process Group)'
+            },
+
+            // Formulas (10 cards)
+            {
+                category: 'formulas',
+                front: 'What is the formula for EV (Earned Value)?',
+                back: 'EV = % Complete × BAC<br><br>Example: 60% complete, $100k budget<br>EV = 0.60 × $100k = $60k'
+            },
+            {
+                category: 'formulas',
+                front: 'What is the formula for SV (Schedule Variance)?',
+                back: 'SV = EV - PV<br><br>Positive = Ahead of schedule<br>Negative = Behind schedule'
+            },
+            {
+                category: 'formulas',
+                front: 'What is the formula for CV (Cost Variance)?',
+                back: 'CV = EV - AC<br><br>Positive = Under budget<br>Negative = Over budget'
+            },
+            {
+                category: 'formulas',
+                front: 'What is the formula for CPI (Cost Performance Index)?',
+                back: 'CPI = EV / AC<br><br>&gt;1.0 = Under budget<br>&lt;1.0 = Over budget<br>1.0 = On budget'
+            },
+            {
+                category: 'formulas',
+                front: 'What is the formula for SPI (Schedule Performance Index)?',
+                back: 'SPI = EV / PV<br><br>&gt;1.0 = Ahead of schedule<br>&lt;1.0 = Behind schedule<br>1.0 = On schedule'
+            },
+            {
+                category: 'formulas',
+                front: 'What is the formula for EAC (Estimate at Completion)?',
+                back: 'EAC = BAC / CPI<br><br>Most common formula when current variances are expected to continue'
+            },
+            {
+                category: 'formulas',
+                front: 'What is the formula for ETC (Estimate to Complete)?',
+                back: 'ETC = EAC - AC<br><br>How much more money is needed to finish'
+            },
+            {
+                category: 'formulas',
+                front: 'What is the formula for VAC (Variance at Completion)?',
+                back: 'VAC = BAC - EAC<br><br>Positive = Under budget<br>Negative = Over budget'
+            },
+            {
+                category: 'formulas',
+                front: 'What is the formula for TCPI (To-Complete Performance Index)?',
+                back: 'TCPI = (BAC - EV) / (BAC - AC)<br><br>Shows required CPI to stay on budget'
+            },
+            {
+                category: 'formulas',
+                front: 'What is the Communication Channels formula?',
+                back: 'n(n-1)/2<br><br>Where n = number of people<br><br>Example: 5 people = 5(4)/2 = 10 channels'
+            },
+
+            // Agile (15 cards)
+            {
+                category: 'agile',
+                front: 'What are the 3 Scrum Roles?',
+                back: '1. Product Owner<br>2. Scrum Master<br>3. Development Team'
+            },
+            {
+                category: 'agile',
+                front: 'What are the 5 Scrum Events?',
+                back: '1. Sprint<br>2. Sprint Planning<br>3. Daily Scrum<br>4. Sprint Review<br>5. Sprint Retrospective'
+            },
+            {
+                category: 'agile',
+                front: 'What are the 3 Scrum Artifacts?',
+                back: '1. Product Backlog<br>2. Sprint Backlog<br>3. Increment'
+            },
+            {
+                category: 'agile',
+                front: 'What is the purpose of Daily Scrum?',
+                back: '15-minute time-boxed event for the Dev Team to synchronize and plan for next 24 hours'
+            },
+            {
+                category: 'agile',
+                front: 'What is Sprint Retrospective?',
+                back: 'Team reflects on past sprint to identify improvements for process, tools, and interactions'
+            },
+            {
+                category: 'agile',
+                front: 'What does the Product Owner do?',
+                back: 'Maximizes product value, manages Product Backlog, ensures team understands items'
+            },
+            {
+                category: 'agile',
+                front: 'What does the Scrum Master do?',
+                back: 'Servant leader who coaches team, removes impediments, facilitates events, protects team'
+            },
+            {
+                category: 'agile',
+                front: 'What is Definition of Done (DoD)?',
+                back: 'Shared understanding of what it means for work to be complete (includes quality criteria)'
+            },
+            {
+                category: 'agile',
+                front: 'What is Velocity in Agile?',
+                back: 'Amount of work completed in a sprint (measured in story points or hours)'
+            },
+            {
+                category: 'agile',
+                front: 'What is a User Story format?',
+                back: 'As a [role], I want [feature], so that [benefit]'
+            },
+            {
+                category: 'agile',
+                front: 'What are the 4 Agile Manifesto values?',
+                back: '1. Individuals > Processes<br>2. Working software > Documentation<br>3. Customer collaboration > Contract<br>4. Responding to change > Following plan'
+            },
+            {
+                category: 'agile',
+                front: 'What is WIP Limit in Kanban?',
+                back: 'Work In Progress limit - maximum number of items allowed in each workflow stage'
+            },
+            {
+                category: 'agile',
+                front: 'What is a Sprint length?',
+                back: 'Time-boxed to 1 month or less (typically 2 weeks)'
+            },
+            {
+                category: 'agile',
+                front: 'What is Product Backlog Refinement?',
+                back: 'Ongoing activity to review, clarify, estimate, and prioritize backlog items'
+            },
+            {
+                category: 'agile',
+                front: 'What is Servant Leadership?',
+                back: 'Leadership style focused on serving team, removing obstacles, and empowering others'
+            },
+
+            // Leadership (8 cards)
+            {
+                category: 'leadership',
+                front: 'What are the 5 Conflict Resolution Techniques?',
+                back: '1. Withdraw/Avoid<br>2. Smooth/Accommodate<br>3. Compromise/Reconcile<br>4. Force/Direct<br>5. Collaborate/Problem Solve (Best)'
+            },
+            {
+                category: 'leadership',
+                front: 'What is Tuckman\'s Team Development Model?',
+                back: 'Forming → Storming → Norming → Performing → Adjourning'
+            },
+            {
+                category: 'leadership',
+                front: 'What are the 5 types of power?',
+                back: '1. Formal (position)<br>2. Reward<br>3. Penalty (coercive)<br>4. Expert<br>5. Referent (respect)'
+            },
+            {
+                category: 'leadership',
+                front: 'What is Maslow\'s Hierarchy of Needs?',
+                back: '1. Physiological<br>2. Safety<br>3. Social<br>4. Esteem<br>5. Self-actualization'
+            },
+            {
+                category: 'leadership',
+                front: 'What are the 5 Leadership Styles?',
+                back: '1. Laissez-faire (hands-off)<br>2. Transactional (reward/penalty)<br>3. Servant Leader (support)<br>4. Transformational (inspire)<br>5. Charismatic'
+            },
+            {
+                category: 'leadership',
+                front: 'What is McGregor\'s Theory X and Y?',
+                back: 'Theory X: People dislike work, need control<br>Theory Y: People enjoy work, self-motivated'
+            },
+            {
+                category: 'leadership',
+                front: 'What is Emotional Intelligence (EQ)?',
+                back: 'Ability to identify, assess, and manage emotions of self and others'
+            },
+            {
+                category: 'leadership',
+                front: 'What is Active Listening?',
+                back: 'Fully concentrating, understanding, responding, and remembering what is being said'
+            },
+
+            // Key Terms (7 cards)
+            {
+                category: 'terms',
+                front: 'What is a Project Charter?',
+                back: 'Document that formally authorizes a project and gives PM authority to use resources'
+            },
+            {
+                category: 'terms',
+                front: 'What is a Work Breakdown Structure (WBS)?',
+                back: 'Hierarchical decomposition of project scope into smaller, manageable deliverables'
+            },
+            {
+                category: 'terms',
+                front: 'What is the Critical Path?',
+                back: 'Longest path through project network; determines shortest project duration; zero float'
+            },
+            {
+                category: 'terms',
+                front: 'What is Float (Slack)?',
+                back: 'Amount of time an activity can be delayed without delaying project or successor'
+            },
+            {
+                category: 'terms',
+                front: 'What is a Risk Register?',
+                back: 'Document containing identified risks, their analysis, and response plans'
+            },
+            {
+                category: 'terms',
+                front: 'What are the 3 types of dependencies?',
+                back: '1. Mandatory (hard logic)<br>2. Discretionary (soft logic)<br>3. External'
+            },
+            {
+                category: 'terms',
+                front: 'What is Progressive Elaboration?',
+                back: 'Continuously improving and detailing a plan as more information becomes available'
+            }
+        ];
+
+        let currentIndex = 0;
+        let currentFilter = 'all';
+        let filteredCards = [...flashcards];
+        let isFlipped = false;
+
+        function updateCard() {
+            const card = filteredCards[currentIndex];
+            document.getElementById('frontCategory').textContent = card.category.charAt(0).toUpperCase() + card.category.slice(1);
+            document.getElementById('backCategory').textContent = card.category.charAt(0).toUpperCase() + card.category.slice(1);
+            document.getElementById('cardNumber').textContent = `${currentIndex + 1}/${filteredCards.length}`;
+            document.getElementById('frontContent').innerHTML = card.front;
+            document.getElementById('backContent').innerHTML = card.back;
+            document.getElementById('currentCard').textContent = currentIndex + 1;
+            document.getElementById('totalCards').textContent = filteredCards.length;
+            
+            // Update progress bar
+            const progress = ((currentIndex + 1) / filteredCards.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentIndex === 0;
+            document.getElementById('nextBtn').disabled = currentIndex === filteredCards.length - 1;
+            
+            // Reset flip state
+            if (isFlipped) {
+                document.getElementById('flashcard').classList.remove('flipped');
+                isFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard').classList.toggle('flipped');
+            isFlipped = !isFlipped;
+        }
+
+        function nextCard() {
+            if (currentIndex < filteredCards.length - 1) {
+                currentIndex++;
+                updateCard();
+            }
+        }
+
+        function previousCard() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCard();
+            }
+        }
+
+        function shuffleCards() {
+            for (let i = filteredCards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [filteredCards[i], filteredCards[j]] = [filteredCards[j], filteredCards[i]];
+            }
+            currentIndex = 0;
+            updateCard();
+        }
+
+        function filterCards(category) {
+            currentFilter = category;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter cards
+            if (category === 'all') {
+                filteredCards = [...flashcards];
+            } else {
+                filteredCards = flashcards.filter(card => card.category === category);
+            }
+            
+            currentIndex = 0;
+            updateCard();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextCard();
+            if (e.key === 'ArrowLeft') previousCard();
+            if (e.key === ' ') flipCard();
+        });
+
+        // Initialize
+        updateCard();
+    </script>
+</body>
+</html>

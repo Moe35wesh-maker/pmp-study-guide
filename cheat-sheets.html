@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMP Cheat Sheets - Quick Reference Guides</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            background: white;
+            color: #667eea;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .cheat-sheet {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .cheat-sheet.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .cheat-sheet h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .cheat-sheet h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .formula-box {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .formula-title {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .formula {
+            font-size: 1.3em;
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .interpretation {
+            margin-top: 10px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .example {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tr:hover {
+            background: #f8f9ff;
+        }
+
+        .list-section {
+            margin: 20px 0;
+        }
+
+        .list-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .list-section li {
+            padding: 12px 20px;
+            margin: 8px 0;
+            background: #f8f9ff;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .list-section li strong {
+            color: #667eea;
+        }
+
+        .highlight-box {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .highlight-box h4 {
+            color: #155724;
+            margin-bottom: 10px;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .warning-box h4 {
+            color: #721c24;
+            margin-bottom: 10px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .header, .tabs, .nav-buttons {
+                display: none;
+            }
+            .cheat-sheet {
+                display: block !important;
+                box-shadow: none;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📄 PMP Cheat Sheets</h1>
+            <p>Quick Reference Guides for Exam Success</p>
+            <button class="download-btn" onclick="window.print()">🖨️ Print All Cheat Sheets</button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('formulas')">EVM Formulas</button>
+            <button class="tab-btn" onclick="showTab('processes')">49 Processes</button>
+            <button class="tab-btn" onclick="showTab('agile')">Agile Quick Guide</button>
+            <button class="tab-btn" onclick="showTab('leadership')">Leadership</button>
+            <button class="tab-btn" onclick="showTab('mnemonics')">Memory Aids</button>
+        </div>
+
+        <!-- EVM Formulas Cheat Sheet -->
+        <div id="formulas" class="cheat-sheet active">
+            <h2>📊 Earned Value Management (EVM) Formulas</h2>
+
+            <h3>Core Values</h3>
+            <div class="formula-box">
+                <div class="formula-title">PV (Planned Value)</div>
+                <div class="formula">PV = Planned % Complete × BAC</div>
+                <div class="interpretation">The budgeted cost of work scheduled to be completed by a specific date.</div>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-title">EV (Earned Value)</div>
+                <div class="formula">EV = Actual % Complete × BAC</div>
+                <div class="interpretation">The budgeted cost of work actually completed.</div>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-title">AC (Actual Cost)</div>
+                <div class="formula">AC = Total costs incurred to date</div>
+                <div class="interpretation">The actual cost incurred for work completed.</div>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-title">BAC (Budget at Completion)</div>
+                <div class="formula">BAC = Total project budget</div>
+                <div class="interpretation">The total planned budget for the project.</div>
+            </div>
+
+            <h3>Variance Analysis</h3>
+            <div class="formula-box">
+                <div class="formula-title">SV (Schedule Variance)</div>
+                <div class="formula">SV = EV - PV</div>
+                <div class="interpretation">
+                    <strong>Positive:</strong> Ahead of schedule<br>
+                    <strong>Negative:</strong> Behind schedule<br>
+                    <strong>Zero:</strong> On schedule
+                </div>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-title">CV (Cost Variance)</div>
+                <div class="formula">CV = EV - AC</div>
+                <div class="interpretation">
+                    <strong>Positive:</strong> Under budget<br>
+                    <strong>Negative:</strong> Over budget<br>
+                    <strong>Zero:</strong> On budget
+                </div>
+            </div>
+
+            <h3>Performance Indices</h3>
+            <div class="formula-box">
+                <div class="formula-title">SPI (Schedule Performance Index)</div>
+                <div class="formula">SPI = EV / PV</div>
+                <div class="interpretation">
+                    <strong>&gt; 1.0:</strong> Ahead of schedule<br>
+                    <strong>&lt; 1.0:</strong> Behind schedule<br>
+                    <strong>= 1.0:</strong> On schedule
+                </div>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-title">CPI (Cost Performance Index)</div>
+                <div class="formula">CPI = EV / AC</div>
+                <div class="interpretation">
+                    <strong>&gt; 1.0:</strong> Under budget<br>
+                    <strong>&lt; 1.0:</strong> Over budget<br>
+                    <strong>= 1.0:</strong> On budget
+                </div>
+            </div>
+
+            <h3>Forecasting</h3>
+            <div class="formula-box">
+                <div class="formula-title">EAC (Estimate at Completion)</div>
+                <div class="formula">EAC = BAC / CPI</div>
+                <div class="interpretation">Most common formula. Use when current variances are expected to continue.</div>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-title">ETC (Estimate to Complete)</div>
+                <div class="formula">ETC = EAC - AC</div>
+                <div class="interpretation">How much more money is needed to complete the project.</div>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-title">VAC (Variance at Completion)</div>
+                <div class="formula">VAC = BAC - EAC</div>
+                <div class="interpretation">
+                    <strong>Positive:</strong> Under budget at completion<br>
+                    <strong>Negative:</strong> Over budget at completion
+                </div>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-title">TCPI (To-Complete Performance Index)</div>
+                <div class="formula">TCPI = (BAC - EV) / (BAC - AC)</div>
+                <div class="interpretation">The CPI needed for remaining work to stay on budget.</div>
+            </div>
+
+            <h3>Other Important Formulas</h3>
+            <div class="formula-box">
+                <div class="formula-title">Communication Channels</div>
+                <div class="formula">Channels = n(n - 1) / 2</div>
+                <div class="interpretation">Where n = number of people</div>
+                <div class="example">
+                    <div class="example-title">Example:</div>
+                    5 people: 5(4)/2 = 10 communication channels
+                </div>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-title">PERT (Three-Point Estimate)</div>
+                <div class="formula">Expected Duration = (O + 4M + P) / 6</div>
+                <div class="interpretation">
+                    O = Optimistic estimate<br>
+                    M = Most Likely estimate<br>
+                    P = Pessimistic estimate
+                </div>
+                <div class="example">
+                    <div class="example-title">Example:</div>
+                    O=3, M=5, P=9 → (3 + 4(5) + 9) / 6 = 32/6 = 5.33 days
+                </div>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-title">Standard Deviation</div>
+                <div class="formula">SD = (P - O) / 6</div>
+                <div class="interpretation">Measure of uncertainty in estimates</div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🎯 Quick Memory Tip</h4>
+                <p><strong>Remember "EVAC":</strong> EV comes first in all formulas!</p>
+                <ul>
+                    <li>SV = <strong>EV</strong> - PV</li>
+                    <li>CV = <strong>EV</strong> - AC</li>
+                    <li>SPI = <strong>EV</strong> / PV</li>
+                    <li>CPI = <strong>EV</strong> / AC</li>
+                </ul>
+            </div>
+
+            <div class="example">
+                <div class="example-title">📝 Complete EVM Example:</div>
+                <strong>Given:</strong><br>
+                • BAC = $100,000<br>
+                • Planned to be 60% complete (PV)<br>
+                • Actually 50% complete (EV)<br>
+                • Spent $55,000 (AC)<br><br>
+                
+                <strong>Calculate:</strong><br>
+                • PV = 0.60 × $100,000 = $60,000<br>
+                • EV = 0.50 × $100,000 = $50,000<br>
+                • AC = $55,000<br><br>
+                
+                • SV = $50,000 - $60,000 = -$10,000 (Behind schedule)<br>
+                • CV = $50,000 - $55,000 = -$5,000 (Over budget)<br>
+                • SPI = $50,000 / $60,000 = 0.83 (Behind)<br>
+                • CPI = $50,000 / $55,000 = 0.91 (Over budget)<br>
+                • EAC = $100,000 / 0.91 = $109,890<br>
+                • VAC = $100,000 - $109,890 = -$9,890 (Over budget)
+            </div>
+        </div>
+
+        <!-- 49 Processes Cheat Sheet -->
+        <div id="processes" class="cheat-sheet">
+            <h2>🔄 The 49 Project Management Processes</h2>
+
+            <h3>Initiating Process Group (2 Processes)</h3>
+            <table>
+                <tr>
+                    <th>Knowledge Area</th>
+                    <th>Process</th>
+                </tr>
+                <tr>
+                    <td>Integration</td>
+                    <td>Develop Project Charter</td>
+                </tr>
+                <tr>
+                    <td>Stakeholder</td>
+                    <td>Identify Stakeholders</td>
+                </tr>
+            </table>
+
+            <h3>Planning Process Group (24 Processes)</h3>
+            <table>
+                <tr>
+                    <th>Knowledge Area</th>
+                    <th>Process</th>
+                </tr>
+                <tr>
+                    <td rowspan="1">Integration</td>
+                    <td>Develop Project Management Plan</td>
+                </tr>
+                <tr>
+                    <td rowspan="6">Scope</td>
+                    <td>Plan Scope Management</td>
+                </tr>
+                <tr>
+                    <td>Collect Requirements</td>
+                </tr>
+                <tr>
+                    <td>Define Scope</td>
+                </tr>
+                <tr>
+                    <td>Create WBS</td>
+                </tr>
+                <tr>
+                    <td rowspan="6">Schedule</td>
+                    <td>Plan Schedule Management</td>
+                </tr>
+                <tr>
+                    <td>Define Activities</td>
+                </tr>
+                <tr>
+                    <td>Sequence Activities</td>
+                </tr>
+                <tr>
+                    <td>Estimate Activity Durations</td>
+                </tr>
+                <tr>
+                    <td>Develop Schedule</td>
+                </tr>
+                <tr>
+                    <td rowspan="4">Cost</td>
+                    <td>Plan Cost Management</td>
+                </tr>
+                <tr>
+                    <td>Estimate Costs</td>
+                </tr>
+                <tr>
+                    <td>Determine Budget</td>
+                </tr>
+                <tr>
+                    <td rowspan="1">Quality</td>
+                    <td>Plan Quality Management</td>
+                </tr>
+                <tr>
+                    <td rowspan="1">Resource</td>
+                    <td>Plan Resource Management</td>
+                </tr>
+                <tr>
+                    <td>Estimate Activity Resources</td>
+                </tr>
+                <tr>
+                    <td rowspan="1">Communications</td>
+                    <td>Plan Communications Management</td>
+                </tr>
+                <tr>
+                    <td rowspan="4">Risk</td>
+                    <td>Plan Risk Management</td>
+                </tr>
+                <tr>
+                    <td>Identify Risks</td>
+                </tr>
+                <tr>
+                    <td>Perform Qualitative Risk Analysis</td>
+                </tr>
+                <tr>
+                    <td>Perform Quantitative Risk Analysis</td>
+                </tr>
+                <tr>
+                    <td>Plan Risk Responses</td>
+                </tr>
+                <tr>
+                    <td rowspan="1">Procurement</td>
+                    <td>Plan Procurement Management</td>
+                </tr>
+                <tr>
+                    <td rowspan="1">Stakeholder</td>
+                    <td>Plan Stakeholder Engagement</td>
+                </tr>
+            </table>
+
+            <h3>Executing Process Group (10 Processes)</h3>
+            <table>
+                <tr>
+                    <th>Knowledge Area</th>
+                    <th>Process</th>
+                </tr>
+                <tr>
+                    <td>Integration</td>
+                    <td>Direct and Manage Project Work</td>
+                </tr>
+                <tr>
+                    <td>Integration</td>
+                    <td>Manage Project Knowledge</td>
+                </tr>
+                <tr>
+                    <td>Quality</td>
+                    <td>Manage Quality</td>
+                </tr>
+                <tr>
+                    <td>Resource</td>
+                    <td>Acquire Resources</td>
+                </tr>
+                <tr>
+                    <td>Resource</td>
+                    <td>Develop Team</td>
+                </tr>
+                <tr>
+                    <td>Resource</td>
+                    <td>Manage Team</td>
+                </tr>
+                <tr>
+                    <td>Communications</td>
+                    <td>Manage Communications</td>
+                </tr>
+                <tr>
+                    <td>Risk</td>
+                    <td>Implement Risk Responses</td>
+                </tr>
+                <tr>
+                    <td>Procurement</td>
+                    <td>Conduct Procurements</td>
+                </tr>
+                <tr>
+                    <td>Stakeholder</td>
+                    <td>Manage Stakeholder Engagement</td>
+                </tr>
+            </table>
+
+            <h3>Monitoring & Controlling Process Group (12 Processes)</h3>
+            <table>
+                <tr>
+                    <th>Knowledge Area</th>
+                    <th>Process</th>
+                </tr>
+                <tr>
+                    <td>Integration</td>
+                    <td>Monitor and Control Project Work</td>
+                </tr>
+                <tr>
+                    <td>Integration</td>
+                    <td>Perform Integrated Change Control</td>
+                </tr>
+                <tr>
+                    <td>Scope</td>
+                    <td>Validate Scope</td>
+                </tr>
+                <tr>
+                    <td>Scope</td>
+                    <td>Control Scope</td>
+                </tr>
+                <tr>
+                    <td>Schedule</td>
+                    <td>Control Schedule</td>
+                </tr>
+                <tr>
+                    <td>Cost</td>
+                    <td>Control Costs</td>
+                </tr>
+                <tr>
+                    <td>Quality</td>
+                    <td>Control Quality</td>
+                </tr>
+                <tr>
+                    <td>Resource</td>
+                    <td>Control Resources</td>
+                </tr>
+                <tr>
+                    <td>Communications</td>
+                    <td>Monitor Communications</td>
+                </tr>
+                <tr>
+                    <td>Risk</td>
+                    <td>Monitor Risks</td>
+                </tr>
+                <tr>
+                    <td>Procurement</td>
+                    <td>Control Procurements</td>
+                </tr>
+                <tr>
+                    <td>Stakeholder</td>
+                    <td>Monitor Stakeholder Engagement</td>
+                </tr>
+            </table>
+
+            <h3>Closing Process Group (1 Process)</h3>
+            <table>
+                <tr>
+                    <th>Knowledge Area</th>
+                    <th>Process</th>
+                </tr>
+                <tr>
+                    <td>Integration</td>
+                    <td>Close Project or Phase</td>
+                </tr>
+            </table>
+
+            <div class="highlight-box">
+                <h4>🎯 Process Group Summary</h4>
+                <ul>
+                    <li><strong>Initiating:</strong> 2 processes</li>
+                    <li><strong>Planning:</strong> 24 processes (largest group)</li>
+                    <li><strong>Executing:</strong> 10 processes</li>
+                    <li><strong>Monitoring & Controlling:</strong> 12 processes</li>
+                    <li><strong>Closing:</strong> 1 process</li>
+                </ul>
+                <p><strong>Total: 49 Processes across 10 Knowledge Areas</strong></p>
+            </div>
+        </div>
+
+        <!-- Agile Quick Guide -->
+        <div id="agile" class="cheat-sheet">
+            <h2>🔄 Agile & Scrum Quick Reference</h2>
+
+            <h3>Scrum Framework (3-5-3)</h3>
+            
+            <div class="highlight-box">
+                <h4>3 Roles</h4>
+                <ol>
+                    <li><strong>Product Owner:</strong> Maximizes product value, manages Product Backlog</li>
+                    <li><strong>Scrum Master:</strong> Servant leader, removes impediments, coaches team</li>
+                    <li><strong>Development Team:</strong> Self-organizing, cross-functional, 3-9 members</li>
+                </ol>
+            </div>
+
+            <div class="highlight-box">
+                <h4>5 Events</h4>
+                <ol>
+                    <li><strong>Sprint:</strong> Time-box of 1 month or less (typically 2 weeks)</li>
+                    <li><strong>Sprint Planning:</strong> Plan sprint work (8 hours for 1-month sprint)</li>
+                    <li><strong>Daily Scrum:</strong> 15-minute daily standup</li>
+                    <li><strong>Sprint Review:</strong> Inspect increment, adapt backlog (4 hours max)</li>
+                    <li><strong>Sprint Retrospective:</strong> Team improvement meeting (3 hours max)</li>
+                </ol>
+            </div>
+
+            <div class="highlight-box">
+                <h4>3 Artifacts</h4>
+                <ol>
+                    <li><strong>Product Backlog:</strong> Ordered list of everything needed (owned by PO)</li>
+                    <li><strong>Sprint Backlog:</strong> PBI selected for sprint + plan to deliver</li>
+                    <li><strong>Increment:</strong> Sum of all PBI completed + value of previous increments</li>
+                </ol>
+            </div>
+
+            <h3>4 Agile Manifesto Values</h3>
+            <div class="list-section">
+                <ul>
+                    <li><strong>Individuals and interactions</strong> over processes and tools</li>
+                    <li><strong>Working software</strong> over comprehensive documentation</li>
+                    <li><strong>Customer collaboration</strong> over contract negotiation</li>
+                    <li><strong>Responding to change</strong> over following a plan</li>
+                </ul>
+            </div>
+
+            <h3>12 Agile Principles (Simplified)</h3>
+            <div class="list-section">
+                <ul>
+                    <li>1. Satisfy customer through early/continuous delivery</li>
+                    <li>2. Welcome changing requirements</li>
+                    <li>3. Deliver working software frequently</li>
+                    <li>4. Business & developers work together daily</li>
+                    <li>5. Build projects around motivated individuals</li>
+                    <li>6. Face-to-face conversation is most efficient</li>
+                    <li>7. Working software is primary measure of progress</li>
+                    <li>8. Sustainable development pace</li>
+                    <li>9. Continuous attention to technical excellence</li>
+                    <li>10. Simplicity is essential</li>
+                    <li>11. Self-organizing teams</li>
+                    <li>12. Reflect and adjust regularly</li>
+                </ul>
+            </div>
+
+            <h3>Kanban Key Concepts</h3>
+            <table>
+                <tr>
+                    <th>Concept</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>WIP Limits</td>
+                    <td>Maximum items allowed in each workflow stage</td>
+                </tr>
+                <tr>
+                    <td>Pull System</td>
+                    <td>Work pulled when capacity available (not pushed)</td>
+                </tr>
+                <tr>
+                    <td>Visualize Work</td>
+                    <td>Kanban board makes work visible</td>
+                </tr>
+                <tr>
+                    <td>Continuous Flow</td>
+                    <td>Steady flow without time-boxes</td>
+                </tr>
+                <tr>
+                    <td>Kaizen</td>
+                    <td>Continuous improvement</td>
+                </tr>
+            </table>
+
+            <h3>User Story Format</h3>
+            <div class="formula-box">
+                <div class="formula">As a [role], I want [feature], so that [benefit]</div>
+                <div class="example">
+                    <div class="example-title">Example:</div>
+                    "As a customer, I want to track my order, so that I know when it will arrive"
+                </div>
+            </div>
+
+            <h3>Key Agile Terms</h3>
+            <table>
+                <tr>
+                    <th>Term</th>
+                    <th>Definition</th>
+                </tr>
+                <tr>
+                    <td>Velocity</td>
+                    <td>Amount of work completed per sprint (story points)</td>
+                </tr>
+                <tr>
+                    <td>Definition of Done</td>
+                    <td>Shared understanding of complete work</td>
+                </tr>
+                <tr>
+                    <td>Sprint Goal</td>
+                    <td>Objective set for sprint that can be met through Sprint Backlog</td>
+                </tr>
+                <tr>
+                    <td>Burndown Chart</td>
+                    <td>Visual showing remaining work vs. time</td>
+                </tr>
+                <tr>
+                    <td>Spike</td>
+                    <td>Time-boxed research or investigation</td>
+                </tr>
+                <tr>
+                    <td>Backlog Refinement</td>
+                    <td>Ongoing activity to review, estimate, prioritize items</td>
+                </tr>
+            </table>
+
+            <div class="warning-box">
+                <h4>⚠️ Common Scrum Misconceptions</h4>
+                <ul>
+                    <li>❌ Scrum Master is NOT a project manager</li>
+                    <li>❌ Sprint cannot be extended if work isn't done</li>
+                    <li>❌ Product Owner is NOT the boss of Dev Team</li>
+                    <li>❌ Daily Scrum is NOT a status meeting for managers</li>
+                    <li>❌ Sprint Review is NOT just a demo</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Leadership Cheat Sheet -->
+        <div id="leadership" class="cheat-sheet">
+            <h2>👥 Leadership & Team Management</h2>
+
+            <h3>Tuckman's Team Development Model</h3>
+            <table>
+                <tr>
+                    <th>Stage</th>
+                    <th>Characteristics</th>
+                    <th>PM Actions</th>
+                </tr>
+                <tr>
+                    <td>Forming</td>
+                    <td>Polite, uncertain, testing</td>
+                    <td>Provide direction, set goals</td>
+                </tr>
+                <tr>
+                    <td>Storming</td>
+                    <td>Conflict, competition, resistance</td>
+                    <td>Coach, facilitate, set norms</td>
+                </tr>
+                <tr>
+                    <td>Norming</td>
+                    <td>Cooperation, cohesion, trust</td>
+                    <td>Support, encourage, delegate</td>
+                </tr>
+                <tr>
+                    <td>Performing</td>
+                    <td>High performance, independence</td>
+                    <td>Empower, monitor, celebrate</td>
+                </tr>
+                <tr>
+                    <td>Adjourning</td>
+                    <td>Task completion, disbanding</td>
+                    <td>Recognize, document lessons</td>
+                </tr>
+            </table>
+
+            <h3>5 Types of Power</h3>
+            <div class="list-section">
+                <ul>
+                    <li><strong>Formal (Legitimate):</strong> Authority from position/title</li>
+                    <li><strong>Reward:</strong> Ability to give rewards/bonuses</li>
+                    <li><strong>Penalty (Coercive):</strong> Ability to punish</li>
+                    <li><strong>Expert:</strong> Based on skills and knowledge</li>
+                    <li><strong>Referent:</strong> Based on respect and admiration</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🎯 Best Types of Power for PMs</h4>
+                <p><strong>Expert and Referent</strong> are the most effective for project managers!</p>
+            </div>
+
+            <h3>Conflict Resolution Techniques</h3>
+            <table>
+                <tr>
+                    <th>Technique</th>
+                    <th>Description</th>
+                    <th>Result</th>
+                </tr>
+                <tr>
+                    <td>Withdraw/Avoid</td>
+                    <td>Retreat from conflict</td>
+                    <td>Lose-Lose</td>
+                </tr>
+                <tr>
+                    <td>Smooth/Accommodate</td>
+                    <td>Emphasize agreement, minimize differences</td>
+                    <td>Lose-Win</td>
+                </tr>
+                <tr>
+                    <td>Compromise/Reconcile</td>
+                    <td>Both parties give up something</td>
+                    <td>Lose-Lose</td>
+                </tr>
+                <tr>
+                    <td>Force/Direct</td>
+                    <td>Push one viewpoint</td>
+                    <td>Win-Lose</td>
+                </tr>
+                <tr>
+                    <td style="background: #d4edda;"><strong>Collaborate/Problem Solve</strong></td>
+                    <td style="background: #d4edda;"><strong>Work together for best solution</strong></td>
+                    <td style="background: #d4edda;"><strong>Win-Win (BEST)</strong></td>
+                </tr>
+            </table>
+
+            <h3>Leadership Styles</h3>
+            <div class="list-section">
+                <ul>
+                    <li><strong>Laissez-faire:</strong> Hands-off, let team self-manage</li>
+                    <li><strong>Transactional:</strong> Focus on rewards and penalties</li>
+                    <li><strong>Servant Leader:</strong> Focus on serving team needs (Agile)</li>
+                    <li><strong>Transformational:</strong> Inspire and motivate change</li>
+                    <li><strong>Charismatic:</strong> Use personality to inspire</li>
+                    <li><strong>Interactional:</strong> Mix of transactional, transformational, charismatic</li>
+                </ul>
+            </div>
+
+            <h3>Motivation Theories</h3>
+            
+            <div class="formula-box">
+                <div class="formula-title">Maslow's Hierarchy of Needs</div>
+                <div class="interpretation">
+                    From bottom to top:<br>
+                    1. Physiological (food, water, shelter)<br>
+                    2. Safety (security, stability)<br>
+                    3. Social (belonging, love)<br>
+                    4. Esteem (respect, recognition)<br>
+                    5. Self-Actualization (reach full potential)
+                </div>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-title">Herzberg's Two-Factor Theory</div>
+                <div class="interpretation">
+                    <strong>Hygiene Factors:</strong> Prevent dissatisfaction (salary, working conditions)<br>
+                    <strong>Motivators:</strong> Create satisfaction (achievement, recognition, growth)
+                </div>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-title">McGregor's Theory X and Theory Y</div>
+                <div class="interpretation">
+                    <strong>Theory X:</strong> People dislike work, need control and direction<br>
+                    <strong>Theory Y:</strong> People enjoy work, are self-motivated
+                </div>
+            </div>
+
+            <h3>Communication Types</h3>
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>When to Use</th>
+                </tr>
+                <tr>
+                    <td>Formal Written</td>
+                    <td>Official documents</td>
+                    <td>Contracts, charters, reports</td>
+                </tr>
+                <tr>
+                    <td>Formal Verbal</td>
+                    <td>Presentations, speeches</td>
+                    <td>Status meetings, briefings</td>
+                </tr>
+                <tr>
+                    <td>Informal Written</td>
+                    <td>Emails, memos, notes</td>
+                    <td>Day-to-day communication</td>
+                </tr>
+                <tr>
+                    <td>Informal Verbal</td>
+                    <td>Conversations, discussions</td>
+                    <td>Quick updates, team chats</td>
+                </tr>
+            </table>
+
+            <h3>Active Listening Techniques</h3>
+            <div class="list-section">
+                <ul>
+                    <li><strong>Pay attention:</strong> Focus fully on speaker</li>
+                    <li><strong>Show you're listening:</strong> Nod, maintain eye contact</li>
+                    <li><strong>Provide feedback:</strong> Paraphrase, ask questions</li>
+                    <li><strong>Defer judgment:</strong> Don't interrupt</li>
+                    <li><strong>Respond appropriately:</strong> Honest, respectful</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Memory Aids Cheat Sheet -->
+        <div id="mnemonics" class="cheat-sheet">
+            <h2>🧠 Memory Aids & Mnemonics</h2>
+
+            <h3>Process Groups</h3>
+            <div class="formula-box">
+                <div class="formula-title">I PEMC</div>
+                <div class="interpretation">
+                    <strong>I</strong>nitiating<br>
+                    <strong>P</strong>lanning<br>
+                    <strong>E</strong>xecuting<br>
+                    <strong>M</strong>onitoring & Controlling<br>
+                    <strong>C</strong>losing
+                </div>
+            </div>
+
+            <h3>Knowledge Areas</h3>
+            <div class="formula-box">
+                <div class="formula-title">I SCORE CRIPS</div>
+                <div class="interpretation">
+                    <strong>I</strong>ntegration<br>
+                    <strong>S</strong>cope<br>
+                    <strong>C</strong>ost<br>
+                    <strong>O</strong> (Schedule = "Time" = O for "Order")<br>
+                    <strong>R</strong>esource<br>
+                    <strong>E</strong> (Quality = "Excellence")<br>
+                    <strong>C</strong>ommunications<br>
+                    <strong>R</strong>isk<br>
+                    <strong>I</strong> (Procurement = "Items")<br>
+                    <strong>P</strong> (Stakeholder = "People")<br>
+                    <strong>S</strong> (Scope again? No, this helps remember it!)
+                </div>
+            </div>
+
+            <h3>Scrum 3-5-3</h3>
+            <div class="formula-box">
+                <div class="formula-title">Remember: 3-5-3</div>
+                <div class="interpretation">
+                    <strong>3 Roles:</strong> PO, SM, Dev Team<br>
+                    <strong>5 Events:</strong> Sprint, Planning, Daily, Review, Retro<br>
+                    <strong>3 Artifacts:</strong> Product Backlog, Sprint Backlog, Increment
+                </div>
+            </div>
+
+            <h3>Agile Manifesto Values</h3>
+            <div class="formula-box">
+                <div class="formula-title">ISWC (I Switch)</div>
+                <div class="interpretation">
+                    <strong>I</strong>ndividuals and interactions<br>
+                    <strong>S</strong>oftware (working)<br>
+                    <strong>W</strong> (Collaboration = "Working together")<br>
+                    <strong>C</strong>hange (responding to)
+                </div>
+            </div>
+
+            <h3>Conflict Resolution</h3>
+            <div class="formula-box">
+                <div class="formula-title">WSCFC (Worst to Best)</div>
+                <div class="interpretation">
+                    <strong>W</strong>ithdraw (worst)<br>
+                    <strong>S</strong>mooth<br>
+                    <strong>C</strong>ompromise<br>
+                    <strong>F</strong>orce<br>
+                    <strong>C</strong>ollaborate (best!)
+                </div>
+            </div>
+
+            <h3>Tuckman's Stages</h3>
+            <div class="formula-box">
+                <div class="formula-title">FSNPA (Funny Snappy)</div>
+                <div class="interpretation">
+                    <strong>F</strong>orming<br>
+                    <strong>S</strong>torming<br>
+                    <strong>N</strong>orming<br>
+                    <strong>P</strong>erforming<br>
+                    <strong>A</strong>djourning
+                </div>
+            </div>
+
+            <h3>EVM Formula Memory Aids</h3>
+            <div class="formula-box">
+                <div class="formula-title">EV Always Comes First!</div>
+                <div class="interpretation">
+                    <strong>All variance formulas:</strong> EV - something<br>
+                    <strong>All index formulas:</strong> EV / something<br><br>
+                    
+                    <strong>SV:</strong> EV - <strong>P</strong>V (P for <strong>P</strong>lan)<br>
+                    <strong>CV:</strong> EV - <strong>A</strong>C (A for <strong>A</strong>ctual)<br>
+                    <strong>SPI:</strong> EV / <strong>P</strong>V<br>
+                    <strong>CPI:</strong> EV / <strong>A</strong>C
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>💡 Quick Memory Tip: Positive is Good!</h4>
+                <p>For ALL EVM metrics:</p>
+                <ul>
+                    <li><strong>Positive variance (SV, CV)</strong> = Good! (ahead/under budget)</li>
+                    <li><strong>Index > 1.0 (SPI, CPI)</strong> = Good! (ahead/under budget)</li>
+                    <li><strong>Negative variance</strong> = Bad! (behind/over budget)</li>
+                    <li><strong>Index < 1.0</strong> = Bad! (behind/over budget)</li>
+                </ul>
+            </div>
+
+            <h3>Risk Strategies Memory Aid</h3>
+            <div class="formula-box">
+                <div class="formula-title">Negative Risks (Threats): AEAM</div>
+                <div class="interpretation">
+                    <strong>A</strong>void<br>
+                    <strong>E</strong>scalate<br>
+                    <strong>A</strong>ccept<br>
+                    <strong>M</strong>itigate
+                </div>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula-title">Positive Risks (Opportunities): EEES</div>
+                <div class="interpretation">
+                    <strong>E</strong>xploit<br>
+                    <strong>E</strong>scalate<br>
+                    <strong>E</strong>nhance<br>
+                    <strong>S</strong>hare
+                </div>
+            </div>
+
+            <h3>Critical Path Concepts</h3>
+            <div class="formula-box">
+                <div class="formula-title">Critical Path = Zero Float</div>
+                <div class="interpretation">
+                    • <strong>Longest</strong> path through network<br>
+                    • <strong>Shortest</strong> project duration<br>
+                    • <strong>Zero</strong> float/slack<br>
+                    • Cannot be delayed without delaying project
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Common Exam Traps - Remember!</h4>
+                <ul>
+                    <li>Gold plating (adding extra features) is <strong>BAD</strong></li>
+                    <li>Prevention is better than inspection</li>
+                    <li>Collaboration is always the best conflict resolution</li>
+                    <li>Servant leadership is key in Agile</li>
+                    <li>Product Owner owns Product Backlog, not Scrum Master</li>
+                    <li>Daily Scrum is 15 minutes, Sprint Review is 4 hours max (1-month sprint)</li>
+                    <li>Progressive elaboration ≠ scope creep</li>
+                    <li>Fast tracking increases risk, crashing increases cost</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <a href="practice/index.html" class="btn btn-secondary">← Back to Practice Hub</a>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all sheets
+            document.querySelectorAll('.cheat-sheet').forEach(sheet => {
+                sheet.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected sheet
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

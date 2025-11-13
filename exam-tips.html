@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMP Exam Tips - Proven Strategies for Success</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .tip-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .tip-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .tip-title {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .tip-content {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+
+        .highlight-box {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .highlight-box h4 {
+            color: #155724;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .warning-box h4 {
+            color: #721c24;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border: 2px solid #17a2b8;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .info-box h4 {
+            color: #0c5460;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            line-height: 2;
+        }
+
+        ul li, ol li {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            padding: 12px;
+            background: #f8f9ff;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .checklist li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tr:hover {
+            background: #f8f9ff;
+        }
+
+        .strategy-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .strategy-card h4 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>💡 PMP Exam Tips & Strategies</h1>
+            <p>Proven techniques from successful PMP holders</p>
+        </div>
+
+        <!-- Exam Overview -->
+        <div class="section">
+            <h2>📋 Exam Overview</h2>
+            
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <td><strong>Number of Questions</strong></td>
+                    <td>180 questions</td>
+                </tr>
+                <tr>
+                    <td><strong>Exam Duration</strong></td>
+                    <td>230 minutes (3 hours 50 minutes)</td>
+                </tr>
+                <tr>
+                    <td><strong>Question Types</strong></td>
+                    <td>Multiple choice, Multiple response, Matching, Hotspot, Fill-in-the-blank</td>
+                </tr>
+                <tr>
+                    <td><strong>Scoring</strong></td>
+                    <td>Above Target, Target, Below Target, Needs Improvement</td>
+                </tr>
+                <tr>
+                    <td><strong>Passing Score</strong></td>
+                    <td>Not disclosed (but aim for 70-75%+ in practice)</td>
+                </tr>
+                <tr>
+                    <td><strong>Breaks</strong></td>
+                    <td>Two 10-minute breaks (optional)</td>
+                </tr>
+            </table>
+
+            <h3>Domain Breakdown</h3>
+            <table>
+                <tr>
+                    <th>Domain</th>
+                    <th>Percentage</th>
+                    <th>Approx. Questions</th>
+                </tr>
+                <tr>
+                    <td>People</td>
+                    <td>42%</td>
+                    <td>~76 questions</td>
+                </tr>
+                <tr>
+                    <td>Process</td>
+                    <td>50%</td>
+                    <td>~90 questions</td>
+                </tr>
+                <tr>
+                    <td>Business Environment</td>
+                    <td>8%</td>
+                    <td>~14 questions</td>
+                </tr>
+            </table>
+
+            <div class="info-box">
+                <h4>📊 Critical Insight</h4>
+                <p><strong>~50% of exam questions involve Agile/Hybrid approaches!</strong> This cuts across all domains. Master Agile concepts to succeed!</p>
+            </div>
+        </div>
+
+        <!-- Before Exam Day -->
+        <div class="section">
+            <h2>📅 Before Exam Day</h2>
+
+            <h3>4 Weeks Before Exam</h3>
+            <ul class="checklist">
+                <li>Complete all practice modules (Rapid Fire, Planning, Closing, Business, Agile)</li>
+                <li>Review flashcards daily (15-30 minutes)</li>
+                <li>Study cheat sheets and memorize key formulas</li>
+                <li>Take at least 2 full-length mock exams (180 questions each)</li>
+                <li>Score consistently 75%+ on practice tests</li>
+            </ul>
+
+            <h3>1 Week Before Exam</h3>
+            <ul class="checklist">
+                <li>Take final mock exam under timed conditions</li>
+                <li>Review weak areas identified in practice tests</li>
+                <li>Re-study Agile concepts (Scrum 3-5-3, servant leadership)</li>
+                <li>Practice EVM calculations until automatic</li>
+                <li>Review all cheat sheets one final time</li>
+            </ul>
+
+            <h3>Night Before Exam</h3>
+            <ul class="checklist">
+                <li>Light review only - don't cram!</li>
+                <li>Get 7-8 hours of sleep</li>
+                <li>Prepare exam materials (ID, confirmation, brain dump sheet)</li>
+                <li>Plan your route to test center (if in-person)</li>
+                <li>Set multiple alarms</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>🎯 Golden Rule</h4>
+                <p><strong>Quality over Quantity:</strong> Better to deeply understand core concepts than to memorize everything superficially. Focus on understanding WHY, not just WHAT.</p>
+            </div>
+        </div>
+
+        <!-- Brain Dump Strategy -->
+        <div class="section">
+            <h2>🧠 The Brain Dump Strategy</h2>
+
+            <div class="tip-box">
+                <div class="tip-icon">💡</div>
+                <div class="tip-title">What is a Brain Dump?</div>
+                <div class="tip-content">
+                    In the first 5-10 minutes of your exam (before answering questions), write down key formulas, processes, and mnemonics on your provided whiteboard/scratch paper. This frees your mind to focus on questions.
+                </div>
+            </div>
+
+            <h3>What to Include in Your Brain Dump</h3>
+
+            <div class="strategy-card">
+                <h4>1. EVM Formulas (2 minutes)</h4>
+                <ul>
+                    <li>EV = % Complete × BAC</li>
+                    <li>SV = EV - PV</li>
+                    <li>CV = EV - AC</li>
+                    <li>SPI = EV / PV</li>
+                    <li>CPI = EV / AC</li>
+                    <li>EAC = BAC / CPI</li>
+                    <li>Communication Channels = n(n-1)/2</li>
+                    <li>PERT = (O + 4M + P) / 6</li>
+                </ul>
+            </div>
+
+            <div class="strategy-card">
+                <h4>2. Process Groups & Count (1 minute)</h4>
+                <ul>
+                    <li>Initiating: 2 processes</li>
+                    <li>Planning: 24 processes</li>
+                    <li>Executing: 10 processes</li>
+                    <li>M&C: 12 processes</li>
+                    <li>Closing: 1 process</li>
+                </ul>
+            </div>
+
+            <div class="strategy-card">
+                <h4>3. Scrum 3-5-3 (1 minute)</h4>
+                <ul>
+                    <li>3 Roles: PO, SM, Dev Team</li>
+                    <li>5 Events: Sprint, Planning, Daily, Review, Retro</li>
+                    <li>3 Artifacts: Product Backlog, Sprint Backlog, Increment</li>
+                </ul>
+            </div>
+
+            <div class="strategy-card">
+                <h4>4. Conflict Resolution (1 minute)</h4>
+                <ul>
+                    <li>Withdraw → Smooth → Compromise → Force → Collaborate (BEST)</li>
+                </ul>
+            </div>
+
+            <div class="strategy-card">
+                <h4>5. Leadership & Motivation (1 minute)</h4>
+                <ul>
+                    <li>Tuckman: Forming → Storming → Norming → Performing → Adjourning</li>
+                    <li>Power types: Formal, Reward, Penalty, Expert, Referent</li>
+                    <li>Maslow's Hierarchy (bottom to top): Physiological, Safety, Social, Esteem, Self-actualization</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Don't Overdo It!</h4>
+                <p>Limit brain dump to 5-10 minutes maximum. You have 180 questions to answer - don't waste too much time on the dump!</p>
+            </div>
+        </div>
+
+        <!-- Question-Answering Strategies -->
+        <div class="section">
+            <h2>🎯 Question-Answering Strategies</h2>
+
+            <h3>The 4-Step Process</h3>
+
+            <div class="tip-box">
+                <div class="tip-icon">1️⃣</div>
+                <div class="tip-title">Read Carefully</div>
+                <div class="tip-content">
+                    Read the ENTIRE question, including all answer choices. Look for keywords like "FIRST," "BEST," "NEXT," "MOST," "LEAST." These are crucial!
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-icon">2️⃣</div>
+                <div class="tip-title">Identify the Process Group</div>
+                <div class="tip-content">
+                    Determine if the question is about Initiating, Planning, Executing, Monitoring & Controlling, or Closing. This eliminates wrong answers immediately.
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-icon">3️⃣</div>
+                <div class="tip-title">Eliminate Obviously Wrong Answers</div>
+                <div class="tip-content">
+                    Cross out 1-2 answers that are clearly incorrect. This increases your odds from 25% to 33-50%.
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-icon">4️⃣</div>
+                <div class="tip-title">Choose the BEST Answer</div>
+                <div class="tip-content">
+                    Often multiple answers seem correct. Choose the one that follows PMI's philosophy: collaboration, servant leadership, proactive planning, and stakeholder engagement.
+                </div>
+            </div>
+
+            <h3>Common Question Keywords</h3>
+
+            <table>
+                <tr>
+                    <th>Keyword</th>
+                    <th>What It Means</th>
+                    <th>Strategy</th>
+                </tr>
+                <tr>
+                    <td><strong>FIRST</strong></td>
+                    <td>What is the first action?</td>
+                    <td>Look for initiating/planning activities</td>
+                </tr>
+                <tr>
+                    <td><strong>NEXT</strong></td>
+                    <td>What should happen next?</td>
+                    <td>Follow process group sequence</td>
+                </tr>
+                <tr>
+                    <td><strong>BEST</strong></td>
+                    <td>Which is most effective?</td>
+                    <td>Choose collaborative, proactive option</td>
+                </tr>
+                <tr>
+                    <td><strong>MOST</strong></td>
+                    <td>Which is most likely/important?</td>
+                    <td>Follow PMI best practices</td>
+                </tr>
+                <tr>
+                    <td><strong>LEAST</strong></td>
+                    <td>Which is least appropriate?</td>
+                    <td>Avoid reactive, blame-focused options</td>
+                </tr>
+            </table>
+
+            <h3>PMI's Mindset - Choose Answers That Reflect:</h3>
+
+            <div class="highlight-box">
+                <h4>✅ PMI Philosophy</h4>
+                <ul>
+                    <li><strong>Proactive</strong> over reactive</li>
+                    <li><strong>Prevention</strong> over inspection</li>
+                    <li><strong>Collaboration</strong> over force/dictation</li>
+                    <li><strong>Servant leadership</strong> in Agile contexts</li>
+                    <li><strong>Following processes</strong> and documentation</li>
+                    <li><strong>Stakeholder engagement</strong> and communication</li>
+                    <li><strong>Data-driven decisions</strong> over assumptions</li>
+                    <li><strong>Change control</strong> before implementing changes</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ Avoid Answers That Suggest:</h4>
+                <ul>
+                    <li>Ignoring processes or "winging it"</li>
+                    <li>Blaming team members or stakeholders</li>
+                    <li>Making unilateral decisions without input</li>
+                    <li>Skipping documentation or planning</li>
+                    <li>Gold plating (adding unrequested features)</li>
+                    <li>Ignoring the project management plan</li>
+                    <li>Micromanaging the team</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Agile vs Predictive -->
+        <div class="section">
+            <h2>🔄 Agile vs Predictive Questions</h2>
+
+            <div class="info-box">
+                <h4>📊 Critical Exam Insight</h4>
+                <p>Many questions will specify OR imply the project approach. Read carefully for clues like "iterative," "sprint," "adaptive," or "traditional," "waterfall," "predictive."</p>
+            </div>
+
+            <h3>Agile/Adaptive Context Clues</h3>
+            <ul>
+                <li>Sprint, iteration, increment</li>
+                <li>Product Owner, Scrum Master</li>
+                <li>Daily standup, retrospective</li>
+                <li>User stories, backlog</li>
+                <li>Self-organizing team</li>
+                <li>Servant leadership</li>
+            </ul>
+
+            <h3>Predictive/Traditional Context Clues</h3>
+            <ul>
+                <li>Detailed upfront planning</li>
+                <li>Gantt charts, critical path</li>
+                <li>Change control board</li>
+                <li>Baseline management</li>
+                <li>Formal approval processes</li>
+            </ul>
+
+            <h3>Decision Framework</h3>
+
+            <div class="strategy-card">
+                <h4>In Agile Context, Favor Answers With:</h4>
+                <ul>
+                    <li>Team empowerment and self-organization</li>
+                    <li>Frequent customer collaboration</li>
+                    <li>Embracing change</li>
+                    <li>Working software over documentation</li>
+                    <li>Servant leader removing impediments</li>
+                    <li>Continuous improvement (kaizen)</li>
+                </ul>
+            </div>
+
+            <div class="strategy-card">
+                <h4>In Predictive Context, Favor Answers With:</h4>
+                <ul>
+                    <li>Following the project management plan</li>
+                    <li>Change control processes</li>
+                    <li>Comprehensive documentation</li>
+                    <li>Variance analysis and corrective action</li>
+                    <li>Formal approval and sign-offs</li>
+                    <li>Baseline protection</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Time Management -->
+        <div class="section">
+            <h2>⏰ Time Management During Exam</h2>
+
+            <div class="tip-box">
+                <div class="tip-icon">⏱️</div>
+                <div class="tip-title">The Math</div>
+                <div class="tip-content">
+                    230 minutes ÷ 180 questions = ~1.28 minutes per question (77 seconds)<br>
+                    <strong>Target: 60 questions per hour</strong>
+                </div>
+            </div>
+
+            <h3>Timing Checkpoints</h3>
+
+            <table>
+                <tr>
+                    <th>Time Elapsed</th>
+                    <th>Questions Completed</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>1 hour</td>
+                    <td>60 questions</td>
+                    <td>On track</td>
+                </tr>
+                <tr>
+                    <td>2 hours</td>
+                    <td>120 questions</td>
+                    <td>On track</td>
+                </tr>
+                <tr>
+                    <td>3 hours</td>
+                    <td>180 questions</td>
+                    <td>Perfect! 50 min to review</td>
+                </tr>
+            </table>
+
+            <h3>Time Management Strategies</h3>
+
+            <ul class="checklist">
+                <li><strong>Skip and flag difficult questions</strong> - Come back later</li>
+                <li><strong>Don't spend more than 2 minutes</strong> on any single question on first pass</li>
+                <li><strong>Use the calculator</strong> for all EVM problems - don't do mental math</li>
+                <li><strong>Take breaks strategically</strong> - after 60 and 120 questions</li>
+                <li><strong>Reserve 30-45 minutes</strong> for review at the end</li>
+            </ul>
+
+            <div class="warning-box">
+                <h4>⚠️ Don't Rush!</h4>
+                <p>Many test-takers finish with time to spare and fail because they rushed. Take your time to read carefully. Accuracy > Speed!</p>
+            </div>
+        </div>
+
+        <!-- Common Traps -->
+        <div class="section">
+            <h2>🎭 Common Exam Traps</h2>
+
+            <h3>Trap #1: The "Real World" Answer</h3>
+            <div class="warning-box">
+                <h4>The Trap</h4>
+                <p>An answer choice reflects what you might do in your actual job, but violates PMI best practices.</p>
+                <h4>The Solution</h4>
+                <p>Choose the "PMI way," not the "real-world way." Follow processes, document everything, engage stakeholders.</p>
+            </div>
+
+            <h3>Trap #2: The Incomplete Answer</h3>
+            <div class="warning-box">
+                <h4>The Trap</h4>
+                <p>An answer is partially correct but skips important steps (like "review the risk register" without "then update it").</p>
+                <h4>The Solution</h4>
+                <p>Look for the MOST COMPLETE answer that includes all necessary steps.</p>
+            </div>
+
+            <h3>Trap #3: All Answers Seem Right</h3>
+            <div class="warning-box">
+                <h4>The Trap</h4>
+                <p>Multiple answers are technically correct, but one is BEST.</p>
+                <h4>The Solution</h4>
+                <p>Choose the most proactive, collaborative, process-following answer. When in doubt, pick the answer that involves more stakeholder engagement.</p>
+            </div>
+
+            <h3>Trap #4: Sequence Confusion</h3>
+            <div class="warning-box">
+                <h4>The Trap</h4>
+                <p>Question asks "what should the PM do FIRST" but lists activities from different process groups.</p>
+                <h4>The Solution</h4>
+                <p>Remember the sequence: Initiating → Planning → Executing → M&C → Closing. Always choose the earlier process group activity.</p>
+            </div>
+
+            <h3>Trap #5: Over-Interpretation</h3>
+            <div class="warning-box">
+                <h4>The Trap</h4>
+                <p>Reading too much into the question and making assumptions not stated in the scenario.</p>
+                <h4>The Solution</h4>
+                <p>Answer based ONLY on information given. Don't add your own assumptions.</p>
+            </div>
+        </div>
+
+        <!-- Exam Day -->
+        <div class="section">
+            <h2>📝 Exam Day Checklist</h2>
+
+            <h3>Morning of Exam</h3>
+            <ul class="checklist">
+                <li>Eat a good breakfast (protein + complex carbs)</li>
+                <li>Arrive 30 minutes early</li>
+                <li>Bring two forms of ID</li>
+                <li>Bring exam confirmation/authorization</li>
+                <li>Wear comfortable clothes (layers for temperature)</li>
+                <li>Use restroom before starting</li>
+            </ul>
+
+            <h3>During Breaks</h3>
+            <ul class="checklist">
+                <li>Stretch and walk around</li>
+                <li>Drink water (but not too much!)</li>
+                <li>Have a light snack (nuts, protein bar)</li>
+                <li>Don't discuss exam content</li>
+                <li>Reset mentally for next section</li>
+            </ul>
+
+            <h3>What to Expect at Test Center</h3>
+            <ul>
+                <li><strong>Security:</strong> Photo taken, palm vein scan, locker for belongings</li>
+                <li><strong>Provided:</strong> Whiteboard/scratch paper, markers, calculator</li>
+                <li><strong>Not Allowed:</strong> Phone, watch, wallet, notes, food, drinks</li>
+                <li><strong>Surveillance:</strong> Video/audio recording during exam</li>
+            </ul>
+
+            <div class="info-box">
+                <h4>💻 Computer-Based Exam Features</h4>
+                <ul>
+                    <li>On-screen calculator</li>
+                    <li>Question flagging/marking</li>
+                    <li>Strike-through for answer elimination</li>
+                    <li>Time remaining always visible</li>
+                    <li>Tutorial before exam (use this time!)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Mental Strategies -->
+        <div class="section">
+            <h2>🧘 Mental & Psychological Strategies</h2>
+
+            <h3>Stay Calm Under Pressure</h3>
+
+            <div class="tip-box">
+                <div class="tip-icon">🌬️</div>
+                <div class="tip-title">Breathing Technique</div>
+                <div class="tip-content">
+                    If you feel anxious: Breathe in for 4 counts, hold for 4, exhale for 4, hold for 4. Repeat 3 times. This activates your parasympathetic nervous system.
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-icon">💪</div>
+                <div class="tip-title">Positive Self-Talk</div>
+                <div class="tip-content">
+                    Replace "I don't know this" with "I can figure this out." You've prepared well. Trust your preparation!
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-icon">🔄</div>
+                <div class="tip-title">Move On from Hard Questions</div>
+                <div class="tip-content">
+                    Don't let one difficult question derail your confidence. Flag it, move on, and come back later with fresh eyes.
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🎯 Remember</h4>
+                <ul>
+                    <li>You DON'T need to get all 180 questions right</li>
+                    <li>Everyone finds some questions difficult</li>
+                    <li>Some questions are experimental (unscored)</li>
+                    <li>You've prepared well - trust your training</li>
+                    <li>Thousands pass this exam every month - you can too!</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Post-Exam -->
+        <div class="section">
+            <h2>🎓 After the Exam</h2>
+
+            <h3>What Happens Immediately After</h3>
+            <ul>
+                <li>Survey about exam experience (required)</li>
+                <li>Results displayed on screen immediately!</li>
+                <li>Printout of preliminary results</li>
+                <li>Official results emailed within days</li>
+            </ul>
+
+            <h3>If You Pass 🎉</h3>
+            <ul>
+                <li>Congratulations! You're officially a PMP!</li>
+                <li>Certificate arrives in mail within 6-8 weeks</li>
+                <li>Digital badge available immediately in PMI account</li>
+                <li>Update LinkedIn, resume, email signature</li>
+                <li>Start earning PDUs for recertification (60 PDUs every 3 years)</li>
+            </ul>
+
+            <h3>If You Don't Pass 😔</h3>
+            <ul>
+                <li>Don't be discouraged - many PMPs don't pass on first try</li>
+                <li>Review your domain scores to identify weak areas</li>
+                <li>Wait 14 days before retaking (up to 3 attempts per year)</li>
+                <li>Focus study on domains marked "Below Target"</li>
+                <li>You've learned valuable lessons - use them!</li>
+            </ul>
+        </div>
+
+        <!-- Final Thoughts -->
+        <div class="section">
+            <h2>🌟 Final Thoughts</h2>
+
+            <div class="strategy-card">
+                <h4>The 5 Keys to PMP Success</h4>
+                <ol>
+                    <li><strong>Master Agile</strong> - It's 50% of the exam</li>
+                    <li><strong>Know EVM formulas cold</strong> - Quick, easy points</li>
+                    <li><strong>Think like PMI</strong> - Process-driven, collaborative, proactive</li>
+                    <li><strong>Practice, practice, practice</strong> - Take mock exams</li>
+                    <li><strong>Trust yourself</strong> - You've prepared well!</li>
+                </ol>
+            </div>
+
+            <div class="highlight-box">
+                <h4>💎 Final Wisdom</h4>
+                <p style="font-size: 1.2em; line-height: 1.8;">
+                    <strong>"The PMP exam doesn't test whether you're a good project manager. It tests whether you know PMI's way of project management. Learn PMI's way, and you'll pass!"</strong>
+                </p>
+                <p style="margin-top: 15px; text-align: center;">
+                    <strong>You've got this! Good luck! 🍀</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <a href="practice/index.html" class="btn btn-secondary">← Back to Practice Hub</a>
+            <a href="index.html" class="btn btn-primary">Go to Home</a>
+        </div>
+    </div>
+</body>
+</html>
