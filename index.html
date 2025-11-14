@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete PMP Certification Study Guide with 210 practice questions, interactive flashcards, cheat sheets, and exam tips.">
+    <meta name="keywords" content="PMP, Project Management Professional, PMP Exam, Study Guide, Practice Questions, Certification">
+    <title>PMP Certification Study Guide - 210 Practice Questions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+
+        .hero .tagline {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            padding: 18px 45px;
+            border-radius: 35px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-btn.primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .hero-btn.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Stats Bar */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .stat-number {
+            font-size: 3.5em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #555;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        /* Features Section */
+        .features {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.8em;
+            color: #667eea;
+            margin-bottom: 50px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        .feature-card {
+            padding: 35px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+            border-radius: 20px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        .feature-stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .feature-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+
+        /* Study Path Section */
+        .study-path {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .study-path h2 {
+            text-align: center;
+            font-size: 2.8em;
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+
+        .study-path .intro {
+            text-align: center;
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 50px;
+            line-height: 1.8;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8em;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .week-title {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .week-description {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .week-tasks {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .week-tasks li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+
+        .week-tasks li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.8em;
+            color: #667eea;
+            margin-bottom: 50px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 3em;
+            color: #667eea;
+            opacity: 0.3;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-top: 30px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .testimonial-badge {
+            display: inline-block;
+            background: #d4edda;
+            color: #155724;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        /* CTA Section */
+        .cta {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta h2 {
+            font-size: 2.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.3em;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 18px 45px;
+            border-radius: 35px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta-btn.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .cta-btn.secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2em;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2em;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                padding-left: 70px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-marker {
+                left: 30px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.4em;
+            }
+
+            .features h2,
+            .study-path h2,
+            .testimonials h2,
+            .cta h2 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>🎓 PMP Certification Study Guide</h1>
+            <p class="subtitle">Your Complete Path to PMP Success</p>
+            <p class="tagline">210 Practice Questions | Interactive Flashcards | Comprehensive Cheat Sheets | Expert Exam Tips</p>
+            <div class="hero-buttons">
+                <a href="practice/" class="hero-btn primary">Start Practice Now →</a>
+                <a href="#features" class="hero-btn secondary">Learn More</a>
+            </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Practice Modules</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">210</div>
+                <div class="stat-label">Total Questions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Exam Coverage</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50</div>
+                <div class="stat-label">Flashcards</div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features" id="features">
+            <h2>📚 What's Included</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-title">Practice Modules</div>
+                    <div class="feature-description">
+                        Five comprehensive practice modules covering all PMP domains: Rapid Fire Round, Planning, Closing, Business Environment, and Agile & Hybrid approaches.
+                    </div>
+                    <div class="feature-stats">
+                        <span class="feature-badge">210 Questions</span>
+                        <span class="feature-badge">Instant Feedback</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎴</div>
+                    <div class="feature-title">Interactive Flashcards</div>
+                    <div class="feature-description">
+                        50 interactive flashcards covering formulas, processes, Agile concepts, leadership theories, and key terms. Click to flip and test your knowledge!
+                    </div>
+                    <div class="feature-stats">
+                        <span class="feature-badge">5 Categories</span>
+                        <span class="feature-badge">Mobile-Friendly</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <div class="feature-title">Cheat Sheets</div>
+                    <div class="feature-description">
+                        Quick reference guides for EVM formulas, all 49 processes, Agile framework, leadership styles, and memory aids. Print-friendly format included!
+                    </div>
+                    <div class="feature-stats">
+                        <span class="feature-badge">5 Sections</span>
+                        <span class="feature-badge">Print-Ready</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <div class="feature-title">Exam Tips & Strategies</div>
+                    <div class="feature-description">
+                        Proven test-taking strategies, brain dump techniques, time management tips, and common trap identification to maximize your exam performance.
+                    </div>
+                    <div class="feature-stats">
+                        <span class="feature-badge">Expert Guidance</span>
+                        <span class="feature-badge">Battle-Tested</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-title">Agile Focus</div>
+                    <div class="feature-description">
+                        50% of PMP exam involves Agile! Master Scrum 3-5-3, Kanban, servant leadership, and hybrid approaches with dedicated content.
+                    </div>
+                    <div class="feature-stats">
+                        <span class="feature-badge">50 Questions</span>
+                        <span class="feature-badge">Critical!</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">EVM Mastery</div>
+                    <div class="feature-description">
+                        Complete coverage of Earned Value Management formulas with examples, practice problems, and quick reference tables for exam success.
+                    </div>
+                    <div class="feature-stats">
+                        <span class="feature-badge">All Formulas</span>
+                        <span class="feature-badge">Examples</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Study Path Section -->
+        <div class="study-path">
+            <h2>🎯 4-Week Study Plan</h2>
+            <p class="intro">Follow this proven study path to pass your PMP exam with confidence</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <div class="week-title">Week 1: Foundation</div>
+                        <div class="week-description">Establish your baseline and build core knowledge</div>
+                        <ul class="week-tasks">
+                            <li>Complete Rapid Fire Round daily (15 min)</li>
+                            <li>Study Planning Process Group module (40 questions)</li>
+                            <li>Study Business Environment module (40 questions)</li>
+                            <li>Review EVM formulas cheat sheet</li>
+                            <li>Practice flashcards: Formulas + Processes</li>
+                            <li><strong>Goal: 75%+ accuracy</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <div class="week-title">Week 2: Process Mastery</div>
+                        <div class="week-description">Deepen understanding of project processes</div>
+                        <ul class="week-tasks">
+                            <li>Continue Rapid Fire Round daily</li>
+                            <li>Retry Planning & Business modules (aim for 80%+)</li>
+                            <li>Study Closing Process Group (30 questions)</li>
+                            <li>Review 49 Processes cheat sheet</li>
+                            <li>Practice flashcards: All categories</li>
+                            <li><strong>Goal: Consistent 75%+ scores</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <div class="week-title">Week 3: Agile Deep Dive</div>
+                        <div class="week-description">Master Agile - it's 50% of the exam!</div>
+                        <ul class="week-tasks">
+                            <li>Daily Rapid Fire Round</li>
+                            <li><strong>Study Agile & Hybrid module thoroughly (50q)</strong></li>
+                            <li>Master Scrum 3-5-3 framework</li>
+                            <li>Review Agile cheat sheet daily</li>
+                            <li>Practice flashcards: Agile + Leadership</li>
+                            <li><strong>Goal: 80%+ on Agile module</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <div class="week-title">Week 4: Exam Preparation</div>
+                        <div class="week-description">Final review and exam readiness</div>
+                        <ul class="week-tasks">
+                            <li>Complete all modules one final time</li>
+                            <li>Read Exam Tips guide cover-to-cover</li>
+                            <li>Review all cheat sheets</li>
+                            <li>Practice brain dump strategy</li>
+                            <li>Prepare exam day checklist</li>
+                            <li><strong>Goal: 80%+ on all modules, ready for exam!</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testimonials">
+            <h2>🌟 Success Stories</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <div class="testimonial-text">
+                        The Agile module was crucial - it really is 50% of the exam! The practice questions prepared me perfectly for the actual test.
+                    </div>
+                    <div class="testimonial-author">Sarah M.</div>
+                    <div class="testimonial-badge">✓ PMP Certified</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <div class="testimonial-text">
+                        EVM formulas from the cheat sheet saved me so much time on exam day. I had them memorized cold thanks to the flashcards!
+                    </div>
+                    <div class="testimonial-author">Michael R.</div>
+                    <div class="testimonial-badge">✓ PMP Certified</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <div class="testimonial-text">
+                        Practiced with all 5 modules, scored 80%+ consistently, and passed on my first attempt! The exam tips were spot-on.
+                    </div>
+                    <div class="testimonial-author">Jennifer L.</div>
+                    <div class="testimonial-badge">✓ PMP Certified</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta">
+            <h2>Ready to Pass Your PMP Exam?</h2>
+            <p>Join thousands of successful PMPs who used this study guide to achieve certification</p>
+            <div class="cta-buttons">
+                <a href="practice/" class="cta-btn primary">Start Practice Now →</a>
+                <a href="flashcards.html" class="cta-btn secondary">Review Flashcards</a>
+                <a href="cheat-sheets.html" class="cta-btn secondary">View Cheat Sheets</a>
+                <a href="exam-tips.html" class="cta-btn secondary">Read Exam Tips</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Made with ❤️ for aspiring PMPs</p>
+            <p>PMP, PMBOK, and PMI are registered marks of Project Management Institute, Inc.</p>
+            <p>This is an educational resource and is not affiliated with PMI.</p>
+            <p style="margin-top: 20px;">
+                <a href="https://github.com" target="_blank">View on GitHub</a> | 
+                <a href="https://www.pmi.org" target="_blank">Visit PMI.org</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
