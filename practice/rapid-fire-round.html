@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapid Fire Round - PMP Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .progress-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .progress-fill-container {
+            background: #e0e0e0;
+            height: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .question-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            color: #333;
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .options {
+            list-style: none;
+        }
+
+        .option {
+            background: #f8f9ff;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background: #e8eaff;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #667eea;
+            color: white;
+            border: 2px solid #667eea;
+        }
+
+        .option.correct {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+        }
+
+        .option.incorrect {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+        }
+
+        .explanation {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #ffc107;
+            display: none;
+        }
+
+        .explanation.show {
+            display: block;
+        }
+
+        .explanation-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .explanation-text {
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .score-display {
+            font-size: 4em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 20px 0;
+        }
+
+        .score-message {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .question-card {
+                padding: 25px;
+            }
+            .nav-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ Rapid Fire Round</h1>
+            <p>50 Quick-Fire Questions | Mixed Difficulty | All Knowledge Areas</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-info">
+                <span>Question <span id="currentQ">1</span> of 50</span>
+                <span id="answered">0 Answered</span>
+            </div>
+            <div class="progress-fill-container">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div class="question-card" id="questionCard">
+            <div class="question-number" id="questionNumber">Question 1</div>
+            <div class="question-text" id="questionText"></div>
+            <ul class="options" id="options"></ul>
+            <div class="explanation" id="explanation">
+                <div class="explanation-title">✓ Explanation</div>
+                <div class="explanation-text" id="explanationText"></div>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()">← Previous</button>
+            <button class="btn btn-primary" id="submitBtn" onclick="submitAnswer()">Submit Answer</button>
+            <button class="btn btn-secondary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+            <button class="btn btn-primary" id="finishBtn" onclick="finishQuiz()" style="display:none;">Finish Quiz</button>
+        </div>
+
+        <div class="results" id="results">
+            <h2>🎉 Quiz Complete!</h2>
+            <div class="score-display" id="scoreDisplay">0%</div>
+            <div class="score-message" id="scoreMessage"></div>
+            <div class="nav-buttons">
+                <button class="btn btn-primary" onclick="reviewAnswers()">Review Answers</button>
+                <button class="btn btn-secondary" onclick="restartQuiz()">Restart Quiz</button>
+                <a href="index.html" class="btn btn-secondary">Back to Hub</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What are the five Process Groups in project management?",
+                options: [
+                    "Planning, Designing, Building, Testing, Deploying",
+                    "Initiating, Planning, Executing, Monitoring & Controlling, Closing",
+                    "Start, Plan, Do, Check, Act",
+                    "Define, Measure, Analyze, Improve, Control"
+                ],
+                correct: 1,
+                explanation: "The five Process Groups are: Initiating, Planning, Executing, Monitoring & Controlling, and Closing. These are the standard process groups defined in the PMBOK Guide."
+            },
+            {
+                question: "Which process creates the project charter?",
+                options: [
+                    "Plan Scope Management",
+                    "Develop Project Management Plan",
+                    "Develop Project Charter",
+                    "Identify Stakeholders"
+                ],
+                correct: 2,
+                explanation: "Develop Project Charter is the process of creating the document that formally authorizes the existence of a project and gives the project manager authority to use organizational resources."
+            },
+            {
+                question: "What is the formula for Schedule Variance (SV)?",
+                options: [
+                    "SV = AC - EV",
+                    "SV = EV - PV",
+                    "SV = PV - EV",
+                    "SV = EV - AC"
+                ],
+                correct: 1,
+                explanation: "Schedule Variance (SV) = EV - PV. A positive SV means the project is ahead of schedule, while a negative SV means it's behind schedule."
+            },
+            {
+                question: "In Scrum, who is responsible for maximizing the value of the product?",
+                options: [
+                    "Scrum Master",
+                    "Development Team",
+                    "Product Owner",
+                    "Project Manager"
+                ],
+                correct: 2,
+                explanation: "The Product Owner is responsible for maximizing the value of the product and the work of the Development Team. The Product Owner is the sole person responsible for managing the Product Backlog."
+            },
+            {
+                question: "How many processes are in the Planning Process Group?",
+                options: [
+                    "10 processes",
+                    "18 processes",
+                    "24 processes",
+                    "32 processes"
+                ],
+                correct: 2,
+                explanation: "There are 24 processes in the Planning Process Group, making it the largest process group. These processes establish the total scope of effort, define and refine objectives, and develop the course of action required to attain those objectives."
+            },
+            {
+                question: "What does CPI stand for in Earned Value Management?",
+                options: [
+                    "Cost Performance Index",
+                    "Critical Path Indicator",
+                    "Current Project Investment",
+                    "Cumulative Performance Indicator"
+                ],
+                correct: 0,
+                explanation: "CPI stands for Cost Performance Index. It's calculated as EV/AC. A CPI greater than 1.0 means the project is under budget, while less than 1.0 means it's over budget."
+            },
+            {
+                question: "What is the primary focus of servant leadership in Agile?",
+                options: [
+                    "Directing team members on what to do",
+                    "Serving the team by removing impediments",
+                    "Making all project decisions",
+                    "Enforcing strict process compliance"
+                ],
+                correct: 1,
+                explanation: "Servant leadership focuses on serving the team by removing impediments, facilitating collaboration, and empowering team members. The servant leader helps the team succeed rather than directing their work."
+            },
+            {
+                question: "Which conflict resolution technique provides a Win-Win outcome?",
+                options: [
+                    "Forcing",
+                    "Smoothing",
+                    "Compromising",
+                    "Collaborating"
+                ],
+                correct: 3,
+                explanation: "Collaborating (or Problem Solving) is the conflict resolution technique that provides a Win-Win outcome. It involves incorporating multiple viewpoints and insights from differing perspectives to reach consensus."
+            },
+            {
+                question: "What is the Critical Path in project scheduling?",
+                options: [
+                    "The path with the most resources assigned",
+                    "The longest path through the project network",
+                    "The path with the highest risk",
+                    "The path with the most critical tasks"
+                ],
+                correct: 1,
+                explanation: "The Critical Path is the longest path through the project network diagram, which determines the shortest possible project duration. Activities on the critical path have zero float/slack."
+            },
+            {
+                question: "How long is a Daily Scrum (Daily Standup)?",
+                options: [
+                    "10 minutes",
+                    "15 minutes",
+                    "30 minutes",
+                    "1 hour"
+                ],
+                correct: 1,
+                explanation: "The Daily Scrum is a 15-minute time-boxed event for the Development Team to synchronize activities and create a plan for the next 24 hours."
+            },
+            {
+                question: "What does WBS stand for?",
+                options: [
+                    "Work Breakdown Structure",
+                    "Weekly Business Summary",
+                    "Work Budget Schedule",
+                    "Workflow Base System"
+                ],
+                correct: 0,
+                explanation: "WBS stands for Work Breakdown Structure. It's a hierarchical decomposition of the total scope of work to be carried out by the project team to accomplish project objectives and create required deliverables."
+            },
+            {
+                question: "Which Agile Manifesto value emphasizes 'Working software over comprehensive documentation'?",
+                options: [
+                    "Value 1",
+                    "Value 2",
+                    "Value 3",
+                    "Value 4"
+                ],
+                correct: 1,
+                explanation: "This is the second value of the Agile Manifesto. While documentation has value, the Agile Manifesto emphasizes that working software is more valuable."
+            },
+            {
+                question: "What is the formula for Communication Channels?",
+                options: [
+                    "n × (n - 1)",
+                    "n(n - 1) / 2",
+                    "n² - n",
+                    "2n - 1"
+                ],
+                correct: 1,
+                explanation: "The formula for communication channels is n(n-1)/2, where n is the number of people. For example, with 5 people: 5(4)/2 = 10 communication channels."
+            },
+            {
+                question: "In Tuckman's team development model, which stage comes after Storming?",
+                options: [
+                    "Performing",
+                    "Forming",
+                    "Norming",
+                    "Adjourning"
+                ],
+                correct: 2,
+                explanation: "The sequence is: Forming → Storming → Norming → Performing → Adjourning. After the conflict of Storming, teams move to Norming where they start cooperating and establishing norms."
+            },
+            {
+                question: "What is the primary purpose of a Sprint Retrospective?",
+                options: [
+                    "To demonstrate the increment to stakeholders",
+                    "To plan the next sprint's work",
+                    "To identify improvements for the next sprint",
+                    "To review the product backlog"
+                ],
+                correct: 2,
+                explanation: "The Sprint Retrospective is an opportunity for the Scrum Team to inspect itself and create a plan for improvements to be enacted during the next Sprint."
+            },
+            {
+                question: "What does EV represent in Earned Value Management?",
+                options: [
+                    "Extra Value",
+                    "Earned Value - the budgeted cost of work performed",
+                    "Expected Value",
+                    "Evaluated Variance"
+                ],
+                correct: 1,
+                explanation: "EV (Earned Value) represents the budgeted cost of work actually performed. It's calculated as: EV = % Complete × BAC."
+            },
+            {
+                question: "Which knowledge area includes the Manage Stakeholder Engagement process?",
+                options: [
+                    "Communications Management",
+                    "Stakeholder Management",
+                    "Integration Management",
+                    "Resource Management"
+                ],
+                correct: 1,
+                explanation: "Manage Stakeholder Engagement is part of the Project Stakeholder Management knowledge area. It's an Executing process focused on communicating and working with stakeholders to meet their needs."
+            },
+            {
+                question: "What is the definition of Float (or Slack)?",
+                options: [
+                    "The amount of money available for contingency",
+                    "The time an activity can be delayed without delaying the project",
+                    "The buffer time added to all activities",
+                    "The difference between early start and late start"
+                ],
+                correct: 1,
+                explanation: "Float (or Slack) is the amount of time an activity can be delayed without delaying the project finish date. Activities on the critical path have zero float."
+            },
+            {
+                question: "How many roles are in the Scrum framework?",
+                options: [
+                    "2 roles",
+                    "3 roles",
+                    "4 roles",
+                    "5 roles"
+                ],
+                correct: 1,
+                explanation: "There are 3 roles in Scrum: Product Owner, Scrum Master, and Development Team. This is part of the Scrum 3-5-3 framework (3 roles, 5 events, 3 artifacts)."
+            },
+            {
+                question: "What is the formula for Cost Variance (CV)?",
+                options: [
+                    "CV = EV - PV",
+                    "CV = AC - EV",
+                    "CV = EV - AC",
+                    "CV = PV - AC"
+                ],
+                correct: 2,
+                explanation: "Cost Variance (CV) = EV - AC. A positive CV means the project is under budget, while a negative CV means it's over budget."
+            },
+            {
+                question: "Which process group has only one process?",
+                options: [
+                    "Initiating",
+                    "Planning",
+                    "Executing",
+                    "Closing"
+                ],
+                correct: 3,
+                explanation: "The Closing Process Group has only one process: Close Project or Phase. This process finalizes all activities across all process groups to formally close the project or phase."
+            },
+            {
+                question: "What is the primary artifact that contains all requirements for the product in Scrum?",
+                options: [
+                    "Sprint Backlog",
+                    "Product Backlog",
+                    "Increment",
+                    "Definition of Done"
+                ],
+                correct: 1,
+                explanation: "The Product Backlog is an ordered list of everything that is known to be needed in the product. It's the single source of requirements for any changes to be made to the product."
+            },
+            {
+                question: "Which type of organizational structure gives the Project Manager the most authority?",
+                options: [
+                    "Functional",
+                    "Matrix",
+                    "Projectized",
+                    "Organic"
+                ],
+                correct: 2,
+                explanation: "In a Projectized organization, the Project Manager has the highest level of authority, along with control over the budget and full-time project team members."
+            },
+            {
+                question: "What does BAC stand for in project cost management?",
+                options: [
+                    "Baseline Actual Cost",
+                    "Budget at Completion",
+                    "Budget After Changes",
+                    "Basic Activity Cost"
+                ],
+                correct: 1,
+                explanation: "BAC stands for Budget at Completion. It's the total planned budget for the project."
+            },
+            {
+                question: "In Kanban, what does WIP stand for?",
+                options: [
+                    "Work In Process",
+                    "Weekly Improvement Plan",
+                    "Work Integration Point",
+                    "Workflow Inspection Process"
+                ],
+                correct: 0,
+                explanation: "WIP stands for Work In Process (or Work In Progress). WIP limits are used in Kanban to restrict the amount of work in each stage of the workflow."
+            },
+            {
+                question: "What is progressive elaboration?",
+                options: [
+                    "Adding unnecessary features to the project",
+                    "Continuously improving and detailing a plan as more information becomes available",
+                    "Progressively removing team members",
+                    "Gradually reducing the project scope"
+                ],
+                correct: 1,
+                explanation: "Progressive elaboration is the iterative process of increasing the level of detail in a project management plan as greater amounts of information and more accurate estimates become available."
+            },
+            {
+                question: "Which process identifies all project stakeholders?",
+                options: [
+                    "Plan Stakeholder Engagement",
+                    "Manage Stakeholder Engagement",
+                    "Identify Stakeholders",
+                    "Monitor Stakeholder Engagement"
+                ],
+                correct: 2,
+                explanation: "Identify Stakeholders is an Initiating process that identifies the people, groups, or organizations that could impact or be impacted by the project."
+            },
+            {
+                question: "What is the duration of a Sprint in Scrum?",
+                options: [
+                    "Always 2 weeks",
+                    "1 month or less",
+                    "2 to 4 weeks only",
+                    "As long as needed"
+                ],
+                correct: 1,
+                explanation: "A Sprint is time-boxed to one month or less. Typically Sprints are 2 weeks, but they can be 1, 2, 3, or 4 weeks depending on what works best for the team."
+            },
+            {
+                question: "What does SPI stand for in Earned Value Management?",
+                options: [
+                    "Standard Performance Indicator",
+                    "Schedule Performance Index",
+                    "Stakeholder Participation Index",
+                    "Sprint Planning Iteration"
+                ],
+                correct: 1,
+                explanation: "SPI stands for Schedule Performance Index, calculated as EV/PV. An SPI greater than 1.0 indicates the project is ahead of schedule."
+            },
+            {
+                question: "Which Agile principle emphasizes 'Customer collaboration over contract negotiation'?",
+                options: [
+                    "Agile Principle 4",
+                    "Agile Manifesto Value 3",
+                    "Scrum Value 2",
+                    "XP Practice 5"
+                ],
+                correct: 1,
+                explanation: "This is the third value of the Agile Manifesto. While contracts are important, the Agile Manifesto values customer collaboration more highly."
+            },
+            {
+                question: "What is the purpose of the Validate Scope process?",
+                options: [
+                    "To verify the correctness of deliverables",
+                    "To obtain formal acceptance of deliverables",
+                    "To create the scope baseline",
+                    "To decompose the scope into work packages"
+                ],
+                correct: 1,
+                explanation: "Validate Scope is the process of formalizing acceptance of the completed project deliverables. It's focused on obtaining acceptance, while Control Quality focuses on correctness."
+            },
+            {
+                question: "In Maslow's Hierarchy of Needs, which need is at the top?",
+                options: [
+                    "Esteem",
+                    "Safety",
+                    "Self-actualization",
+                    "Social"
+                ],
+                correct: 2,
+                explanation: "Self-actualization is at the top of Maslow's Hierarchy. From bottom to top: Physiological, Safety, Social, Esteem, Self-actualization."
+            },
+            {
+                question: "What is the formula for Estimate at Completion (EAC) when current variances are expected to continue?",
+                options: [
+                    "EAC = AC + BAC",
+                    "EAC = BAC / CPI",
+                    "EAC = BAC / SPI",
+                    "EAC = AC + ETC"
+                ],
+                correct: 1,
+                explanation: "When current variances are expected to continue, EAC = BAC / CPI. This is the most commonly used EAC formula on the PMP exam."
+            },
+            {
+                question: "What is a Definition of Done in Scrum?",
+                options: [
+                    "A list of criteria that must be met for work to be considered complete",
+                    "The date when the sprint ends",
+                    "A document signed by stakeholders",
+                    "The project completion certificate"
+                ],
+                correct: 0,
+                explanation: "The Definition of Done is a shared understanding of what it means for work to be complete. It ensures transparency and quality by providing a checklist of criteria."
+            },
+            {
+                question: "Which knowledge area includes Risk Management?",
+                options: [
+                    "Integration Management",
+                    "Cost Management",
+                    "Risk Management",
+                    "Quality Management"
+                ],
+                correct: 2,
+                explanation: "Project Risk Management is one of the 10 knowledge areas. It includes processes for conducting risk management planning, identification, analysis, response planning, and monitoring."
+            },
+            {
+                question: "What is the purpose of a Sprint Review?",
+                options: [
+                    "To review team performance",
+                    "To inspect the increment and adapt the product backlog",
+                    "To plan the next sprint",
+                    "To review the sprint retrospective"
+                ],
+                correct: 1,
+                explanation: "The Sprint Review is held at the end of the Sprint to inspect the Increment and adapt the Product Backlog if needed. Stakeholders provide feedback on the product increment."
+            },
+            {
+                question: "What does TCPI stand for?",
+                options: [
+                    "Total Cost Performance Indicator",
+                    "To-Complete Performance Index",
+                    "Time-Cost Project Integration",
+                    "Technical Capacity Planning Index"
+                ],
+                correct: 1,
+                explanation: "TCPI stands for To-Complete Performance Index. It's calculated as (BAC - EV) / (BAC - AC) and shows the cost performance needed for remaining work to stay on budget."
+            },
+            {
+                question: "Which process creates the WBS?",
+                options: [
+                    "Define Scope",
+                    "Create WBS",
+                    "Plan Scope Management",
+                    "Collect Requirements"
+                ],
+                correct: 1,
+                explanation: "Create WBS is the process of subdividing project deliverables and project work into smaller, more manageable components. It's a Planning process in the Scope Management knowledge area."
+            },
+            {
+                question: "What is Velocity in Agile?",
+                options: [
+                    "How fast the team works",
+                    "The amount of work completed in a sprint",
+                    "The team's speed in coding",
+                    "The rate of defects found"
+                ],
+                correct: 1,
+                explanation: "Velocity is a measure of the amount of work a Team can tackle during a single Sprint. It's typically measured in story points or hours."
+            },
+            {
+                question: "Which power type is based on respect and admiration?",
+                options: [
+                    "Formal power",
+                    "Reward power",
+                    "Expert power",
+                    "Referent power"
+                ],
+                correct: 3,
+                explanation: "Referent power is based on respect and admiration. Along with Expert power, it's considered one of the most effective types of power for project managers."
+            },
+            {
+                question: "What is the primary output of the Develop Project Charter process?",
+                options: [
+                    "Project Management Plan",
+                    "Project Charter",
+                    "Business Case",
+                    "Stakeholder Register"
+                ],
+                correct: 1,
+                explanation: "The Project Charter is the primary output of the Develop Project Charter process. It formally authorizes the existence of a project and provides the project manager with authority to apply resources."
+            },
+            {
+                question: "How many events are in the Scrum framework?",
+                options: [
+                    "3 events",
+                    "4 events",
+                    "5 events",
+                    "6 events"
+                ],
+                correct: 2,
+                explanation: "There are 5 events in Scrum: Sprint, Sprint Planning, Daily Scrum, Sprint Review, and Sprint Retrospective. This is part of the 3-5-3 framework."
+            },
+            {
+                question: "What does AC represent in Earned Value Management?",
+                options: [
+                    "Actual Cost - the realized cost incurred for work performed",
+                    "Activity Cost",
+                    "Approved Cost",
+                    "Allocated Cost"
+                ],
+                correct: 0,
+                explanation: "AC (Actual Cost) represents the realized cost incurred for the work performed on an activity during a specific time period."
+            },
+            {
+                question: "Which conflict resolution technique is considered lose-lose?",
+                options: [
+                    "Collaborating",
+                    "Compromising",
+                    "Forcing",
+                    "Smoothing"
+                ],
+                correct: 1,
+                explanation: "Compromising is considered a lose-lose technique because both parties give up something to reach a resolution. Collaborating (problem solving) is the only win-win technique."
+            },
+            {
+                question: "What is the purpose of lessons learned?",
+                options: [
+                    "To punish team members for mistakes",
+                    "To capture knowledge for future projects",
+                    "To create project documentation",
+                    "To evaluate team performance"
+                ],
+                correct: 1,
+                explanation: "Lessons learned capture knowledge gained during a project so that it can be used to improve future project performance. They should focus on what went well and what could be improved."
+            },
+            {
+                question: "In Agile, what is the purpose of Backlog Refinement?",
+                options: [
+                    "To remove items from the backlog",
+                    "To add detail, estimates, and order to Product Backlog items",
+                    "To finalize the sprint backlog",
+                    "To review completed work"
+                ],
+                correct: 1,
+                explanation: "Backlog Refinement (formerly called Backlog Grooming) is the ongoing process of reviewing Product Backlog items and making them ready for upcoming sprints by adding detail, estimates, and order."
+            },
+            {
+                question: "What does PV represent in Earned Value Management?",
+                options: [
+                    "Project Value",
+                    "Planned Value - the authorized budget assigned to scheduled work",
+                    "Present Value",
+                    "Performance Value"
+                ],
+                correct: 1,
+                explanation: "PV (Planned Value) is the authorized budget assigned to scheduled work. It represents the value of work that should have been completed by a specific date."
+            },
+            {
+                question: "Which process develops the schedule baseline?",
+                options: [
+                    "Plan Schedule Management",
+                    "Define Activities",
+                    "Develop Schedule",
+                    "Control Schedule"
+                ],
+                correct: 2,
+                explanation: "Develop Schedule is the process of analyzing activity sequences, durations, resource requirements, and schedule constraints to create the project schedule model, which includes the schedule baseline."
+            },
+            {
+                question: "What is the maximum length of a Sprint Review for a one-month Sprint?",
+                options: [
+                    "2 hours",
+                    "3 hours",
+                    "4 hours",
+                    "8 hours"
+                ],
+                correct: 2,
+                explanation: "The Sprint Review is time-boxed to a maximum of 4 hours for a one-month Sprint. For shorter Sprints, the event is usually shorter."
+            },
+            {
+                question: "Which knowledge area includes the Perform Integrated Change Control process?",
+                options: [
+                    "Scope Management",
+                    "Integration Management",
+                    "Quality Management",
+                    "Communications Management"
+                ],
+                correct: 1,
+                explanation: "Perform Integrated Change Control is part of the Project Integration Management knowledge area. It's the process of reviewing all change requests and managing changes to deliverables, plans, and documents."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let quizFinished = false;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1}`;
+            document.getElementById('questionText').textContent = q.question;
+            
+            const optionsHtml = q.options.map((option, index) => {
+                const selected = userAnswers[currentQuestion] === index ? 'selected' : '';
+                const disabled = quizFinished ? '' : '';
+                return `<li class="option ${selected}" onclick="selectOption(${index})">${String.fromCharCode(65 + index)}. ${option}</li>`;
+            }).join('');
+            
+            document.getElementById('options').innerHTML = optionsHtml;
+            
+            document.getElementById('currentQ').textContent = currentQuestion + 1;
+            const answered = userAnswers.filter(a => a !== null).length;
+            document.getElementById('answered').textContent = `${answered} Answered`;
+            
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            
+            if (quizFinished) {
+                showExplanation();
+            } else {
+                document.getElementById('explanation').classList.remove('show');
+            }
+            
+            if (currentQuestion === questions.length - 1) {
+                document.getElementById('nextBtn').style.display = 'none';
+                document.getElementById('finishBtn').style.display = 'inline-block';
+            } else {
+                document.getElementById('nextBtn').style.display = 'inline-block';
+                document.getElementById('finishBtn').style.display = 'none';
+            }
+        }
+
+        function selectOption(index) {
+            if (quizFinished) return;
+            userAnswers[currentQuestion] = index;
+            loadQuestion();
+        }
+
+        function submitAnswer() {
+            if (userAnswers[currentQuestion] === null) {
+                alert('Please select an answer first!');
+                return;
+            }
+            showExplanation();
+        }
+
+        function showExplanation() {
+            const q = questions[currentQuestion];
+            const userAnswer = userAnswers[currentQuestion];
+            
+            document.getElementById('explanationText').textContent = q.explanation;
+            document.getElementById('explanation').classList.add('show');
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                option.onclick = null;
+                if (index === q.correct) {
+                    option.classList.add('correct');
+                } else if (index === userAnswer && index !== q.correct) {
+                    option.classList.add('incorrect');
+                }
+            });
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function finishQuiz() {
+            const unanswered = userAnswers.filter(a => a === null).length;
+            if (unanswered > 0) {
+                if (!confirm(`You have ${unanswered} unanswered questions. Do you want to finish anyway?`)) {
+                    return;
+                }
+            }
+            
+            quizFinished = true;
+            calculateScore();
+        }
+
+        function calculateScore() {
+            let correct = 0;
+            questions.forEach((q, index) => {
+                if (userAnswers[index] === q.correct) {
+                    correct++;
+                }
+            });
+            
+            const percentage = Math.round((correct / questions.length) * 100);
+            
+            document.getElementById('questionCard').style.display = 'none';
+            document.querySelector('.nav-buttons').style.display = 'none';
+            document.getElementById('results').classList.add('show');
+            document.getElementById('scoreDisplay').textContent = `${percentage}%`;
+            
+            let message = '';
+            if (percentage >= 85) {
+                message = '🎉 Outstanding! You\'re well-prepared for the PMP exam!';
+            } else if (percentage >= 75) {
+                message = '✅ Great job! Keep practicing to boost your confidence!';
+            } else if (percentage >= 60) {
+                message = '📚 Good effort! Review the explanations and try again.';
+            } else {
+                message = '💪 Keep studying! Focus on your weak areas and you\'ll improve!';
+            }
+            
+            document.getElementById('scoreMessage').textContent = message + ` You got ${correct} out of ${questions.length} questions correct.`;
+        }
+
+        function reviewAnswers() {
+            currentQuestion = 0;
+            document.getElementById('results').classList.remove('show');
+            document.getElementById('questionCard').style.display = 'block';
+            document.querySelector('.nav-buttons').style.display = 'flex';
+            loadQuestion();
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            quizFinished = false;
+            document.getElementById('results').classList.remove('show');
+            document.getElementById('questionCard').style.display = 'block';
+            document.querySelector('.nav-buttons').style.display = 'flex';
+            loadQuestion();
+        }
+
+        // Initialize
+        loadQuestion();
+    </script>
+</body>
+</html>
